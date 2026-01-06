@@ -1,0 +1,194 @@
+/* style.css — updated to match the arithmetic theme, responsive layout, and improved controls */
+
+/* Theme tokens */
+:root{
+  --primary: #06b6d4;
+  --muted: #6b7280;
+  --card-bg-dark: rgba(17,24,39,0.6);
+  --card-bg-light: rgba(255,255,255,0.95);
+  --card-border-dark: rgba(255,255,255,0.06);
+  --card-border-light: rgba(0,0,0,0.06);
+  --white-border: rgba(255,255,255,0.95);
+}
+
+/* Box sizing & base */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body{
+  min-height: 100vh;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  line-height: 1.35;
+  margin: 0;
+  /* background handled by your theme (daisyUI / data-theme) */
+  color: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- Card / panel (calc-block) ----
+   Make responsive: full-width on small screens, constrained max width on large screens.
+   Default to dark-style panels; light theme explicitly overrides below.
+*/
+.calc-block {
+  width: 100%;
+  max-width: 920px;
+  margin: 2.5rem auto;     /* vertical spacing */
+  padding: 1.25rem 1.5rem; /* comfortable padding */
+  border-radius: 12px;
+  border: 1px solid var(--card-border-dark);
+  background: var(--card-bg-dark);
+  color: #e6eef5;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.35);
+}
+
+/* Light theme override (explicit) */
+html[data-theme="light"] .calc-block,
+.dark-mode-off .calc-block {
+  background: var(--card-bg-light);
+  color: #0f172a;
+  border: 1px solid var(--card-border-light);
+  box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+}
+
+/* Section heading */
+.calc-block > h2,
+.calc-block h1,
+.calc-block h3 {
+  margin: 0 0 .75rem 0;
+  font-weight: 600;
+  color: inherit;
+}
+
+/* Inputs, selects and buttons match card styling */
+.input,
+.select,
+textarea {
+  width: 100%;
+  padding: .55rem .75rem;
+  border-radius: 8px;
+  border: 1px solid var(--card-border-dark);
+  background-color: rgba(255,255,255,0.03);
+  color: #e6eef5;
+  font-size: .95rem;
+}
+
+/* Light theme form controls */
+html[data-theme="light"] .input,
+html[data-theme="light"] .select,
+.dark-mode-off .input,
+.dark-mode-off .select {
+  background-color: #fff;
+  border: 1px solid var(--card-border-light);
+  color: #0f172a;
+}
+
+/* Make selects visibly non-transparent and add custom arrow (best-effort) */
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%),
+    linear-gradient(to right, rgba(0,0,0,0.02), rgba(0,0,0,0.02));
+  background-position:
+    calc(100% - 1.15rem) calc(50% - 0.45rem),
+    calc(100% - 0.85rem) calc(50% - 0.45rem),
+    calc(100% - 1.9rem) 50%;
+  background-size: 6px 6px, 6px 6px, 1px 1px;
+  background-repeat: no-repeat;
+  padding-right: 2rem;
+}
+
+/* Buttons: base + primary */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem .75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 160ms cubic-bezier(.2,.9,.3,1), box-shadow 160ms;
+  user-select: none;
+}
+.btn:active { transform: translateY(1px) scale(.995); }
+.btn:hover { box-shadow: 0 8px 24px rgba(2,6,23,0.25); }
+
+.btn-primary {
+  background: linear-gradient(180deg, var(--primary), #0496a2);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Ripple element: created by JS (script.js) */
+.ripple {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(6,182,212,0.18);
+  transform: scale(0);
+  opacity: 1;
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation: rippleAnim 520ms cubic-bezier(.2,.9,.3,1);
+}
+@keyframes rippleAnim {
+  to { transform: scale(1); opacity: 0; }
+}
+
+/* Result pulse animation for feedback */
+.result-pulse {
+  animation: resultPulse 420ms cubic-bezier(.2,.9,.3,1);
+  transform-origin: center;
+}
+@keyframes resultPulse {
+  0% { transform: scale(.98); opacity: 0.85; }
+  60% { transform: scale(1.02); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Steps styling (subtle, matches arithmetic) */
+.steps p {
+  margin: 6px 0;
+  padding-left: 8px;
+  border-left: 2px solid rgba(0,0,0,0.04);
+  color: var(--muted);
+}
+
+/* Small layout helpers */
+#convertClearBtn {
+  display: inline-flex;
+  gap: .75rem;
+  align-items: center;
+}
+
+/* Narrow form rows on small screens, side-by-side on larger */
+@media (min-width: 640px) {
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Focus-visible for keyboard users */
+:focus { outline: none; }
+:focus-visible {
+  outline: 3px solid rgba(6,182,212,0.18);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Make sure calc-block headings and spacing look neat */
+.calc-block > h2 { font-size: 1.125rem; margin-bottom: .75rem; }
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .ripple, .result-pulse { animation: none !important; transition: none !important; }
+}

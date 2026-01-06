@@ -1,0 +1,66 @@
+/* Team Page CSS */
+@media (min-width:768px){
+	.testimonials{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Small utility to ensure main content stays readable */
+main{max-width:1100px;margin:0 auto;padding-left:1rem;padding-right:1rem}
+
+/* Visual design improvements */
+:root{
+	--bg-card:#f7fafc; /* light neutral */
+	--text-primary:#0f172a; /* near-black for contrast */
+	--muted:#6b7280; /* muted text */
+	--accent:#4f46e5; /* indigo */
+}
+
+body{color:var(--text-primary);font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";line-height:1.6}
+
+h1,h2,h3{color:var(--text-primary);line-height:1.25}
+h1{font-size:1.75rem}
+h2{font-size:1.25rem}
+h3{font-size:1rem}
+
+.testimonial-container, .h-full.bg-gray-100{
+	background:var(--bg-card);
+	border:1px solid rgba(15,23,42,0.04);
+	padding:1.25rem;
+	border-radius:12px;
+}
+
+.testimonial-container p{color:var(--text-primary);margin-bottom:.75rem}
+.testimonial-container .title-font{font-weight:600}
+.testimonial-container .text-gray-500{color:var(--muted)}
+
+.testimonial-container img{
+	width:48px;height:48px;flex:0 0 48px;border-radius:9999px;border:2px solid rgba(15,23,42,0.04)
+}
+
+.testimonial-container:focus-within{outline:3px solid rgba(79,70,229,0.12);outline-offset:4px}
+
+/* Make the testimonial header area align nicely */
+.testimonial-container .inline-flex{align-items:center}
+
+/* Improve link and focus styles for accessibility */
+a{color:var(--accent)}
+a:focus{outline:2px dashed var(--accent);outline-offset:3px}
+
+/* Slightly larger tap targets on mobile */
+@media (max-width:480px){
+	.testimonial-container{padding:1rem}
+	h1{font-size:1.5rem}
+}
+
+/* Details / expandable bios styling */
+.member-bio{margin-top:0.75rem}
+.member-bio summary{cursor:pointer;list-style:none;padding:.35rem .5rem;border-radius:8px;background:transparent;color:var(--accent);font-weight:600}
+.member-bio summary:focus{outline:2px dashed rgba(79,70,229,0.25);outline-offset:3px}
+.member-bio[open] summary{background:rgba(79,70,229,0.06)}
+.member-bio p{margin:0.5rem 0;color:var(--text-primary)}
+
+.social-links{display:flex;gap:.5rem;padding:0;margin:0;list-style:none}
+.social-links a{display:inline-block;padding:.35rem .5rem;border-radius:6px;background:rgba(15,23,42,0.03);color:var(--text-primary);text-decoration:none;font-size:.9rem}
+.social-links a:hover,.social-links a:focus{background:rgba(79,70,229,0.08);color:var(--accent)}
+
+
+

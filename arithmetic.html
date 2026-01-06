@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script>
+    (function () {
+      const THEME = "light";
+
+      // Always force light theme
+      document.documentElement.setAttribute("data-theme", THEME);
+
+      // Optional: clear old stored theme to avoid confusion
+      try {
+        localStorage.removeItem("site-theme");
+      } catch (e) { }
+    })();
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arithmetic Operation</title>
+
+  <!-- Tailwind / daisyUI: keep your current setup or use the Tailwind CDN.
+       I left these lines unchanged, but you can replace them with a Tailwind CDN + daisyUI setup if you prefer. -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/arithmetic.css">
+  <style>
+    /* small fallback font & layout tweak */
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+  <!-- skip link for keyboard users -->
+  <a class="sr-only focus:not-sr-only" href="#main">Skip to content</a>
+
+  <!-- navbar / footer are injected by js/script.js -->
+  <div id="navbar"></div>
+
+  <main id="main" class="p-6 max-w-4xl mx-auto">
+    <section class="mb-8">
+      <div class="calc-block card p-6 shadow-sm rounded-lg">
+        <h2 class="text-lg font-semibold mb-4">Arithmetic Operations (Binary & Decimal)</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end">
+          <div>
+            <label class="block text-sm">Number System</label>
+            <select id="numberSystem" class="select w-full">
+              <option value="decimal">Decimal</option>
+              <option value="binary">Binary</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm">Operation</label>
+            <select id="operation" class="select w-full">
+              <option value="add">Addition (+)</option>
+              <option value="sub">Subtraction (−)</option>
+              <option value="mul">Multiplication (×)</option>
+              <option value="div">Division (÷)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm">First Number</label>
+            <input id="num1" class="input w-full" inputmode="numeric" />
+          </div>
+
+          <div>
+            <label class="block text-sm">Second Number</label>
+            <input id="num2" class="input w-full" inputmode="numeric" />
+          </div>
+        </div>
+
+        <div class="mt-4 flex gap-3">
+          <!-- use data-action attributes instead of inline onclick -->
+          <button class="btn btn-primary" data-action="calculate">Calculate</button>
+          <button class="btn" data-action="clear-inputs">Clear</button>
+        </div>
+
+        <hr class="my-4">
+
+        <h3 class="text-md font-medium">Result</h3>
+        <div id="arithResult" class="mt-2 text-lg font-semibold transition-transform will-change-transform"></div>
+
+        <h3 class="mt-4 text-md font-medium">Step-by-Step Solution</h3>
+        <div id="arithSteps" class="steps mt-2"></div>
+
+        <div id="arithError" class="mt-3 text-sm text-red-600" role="alert" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="calc-block card p-6 shadow-sm rounded-lg">
+        <h2 class="text-lg font-semibold mb-4">Practice Mode – Arithmetic Operations</h2>
+
+        <p id="arithPracticeQuestion" class="mb-3">Click "New Question" to start practice</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-sm">Your Answer</label>
+            <input id="arithPracticeAnswer" class="input w-full" />
+          </div>
+
+          <div>
+            <label class="block text-sm">Difficulty</label>
+            <select id="arithDifficulty" class="select w-full">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mt-4 flex gap-3">
+          <button class="btn" data-action="new-question">New Question</button>
+          <button class="btn" data-action="check-answer">Check Answer</button>
+          <button class="btn" data-action="show-steps">Show Steps</button>
+        </div>
+
+        <div id="arithPracticeResult" class="mt-3"></div>
+
+        <h3 class="mt-4 text-md font-medium">Step-by-Step Solution</h3>
+        <div id="arithPracticeSteps" class="steps mt-2"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- your existing conversion scripts (defer them) -->
+  <script src="js/conversions/validations.js" defer></script>
+  <script src="js/conversions/binaryAddition.js" defer></script>
+  <script src="js/conversions/twosComplement.js" defer></script>
+  <script src="js/conversions/animateSteps.js" defer></script>
+  <script src="js/arithmetic/arithmetic.js" defer></script>
+
+  <!-- enhanced site script: inject navbar/footer, theme, microinteractions -->
+  <script src="js/script.js" defer></script>
+</body>
+
+</html>

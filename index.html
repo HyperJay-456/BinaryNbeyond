@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BinaryNbeyond — Home</title>
+
+  <!-- theme initializer (keeps pages consistent) -->
+  <script>
+    (function () {
+      const THEME = "light";
+
+      // Always force light theme
+      document.documentElement.setAttribute("data-theme", THEME);
+
+      // Optional: clear old stored theme to avoid confusion
+      try {
+        localStorage.removeItem("site-theme");
+      } catch (e) { }
+    })();
+  </script>
+
+
+  <!-- framework -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- shared UI + page styles -->
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/index.css" />
+
+  <meta name="description"
+    content="Sci-Calc — Arithmetic, Bitwise & Number conversions with visual step-by-step solutions." />
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+  <a class="sr-only focus:not-sr-only" href="#main">Skip to content</a>
+
+  <!-- navbar will be injected by js/script.js -->
+  <div id="navbar"></div>
+
+  <main id="main" class="min-h-screen flex items-center justify-center p-6">
+    <section class="hero max-w-6xl w-full">
+      <div class="hero-inner grid gap-8 md:grid-cols-2 items-center">
+        <!-- Left: Logo & CTA -->
+        <div class="hero-card card p-8 rounded-xl shadow-lg">
+          <div class="brand flex items-center gap-4">
+            <!-- Replace src with your logo file if you have one -->
+            <img src="ChatGPT Image Dec 24, 2025, 02_17_19 PM.png" alt="Sci-Calc logo"
+              class="logo w-20 h-20 rounded-lg object-cover" />
+            <div>
+              <h1 class="text-2xl md:text-3xl font-extrabold leading-tight">BinaryNbeyond</h1>
+              <p class="text-sm text-muted">Fast, visual calculators for arithmetic, bitwise ops, and base conversions.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <p class="lead text-lg">
+              Simplifying scientific calculations for learners and developers.
+            </p>
+
+            <div class="mt-4">
+              <p class="rotator text-xl font-semibold" aria-live="polite">
+                <span class="rotator-static">Try:</span>
+                <span id="rotatingText" class="rotating-word">Arithmetic Calculations</span>
+              </p>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a class="btn btn-primary" href="/arithmetic.html" data-ripple>Open Arithmetic</a>
+              <a class="btn" href="/numberConversions.html" data-ripple>Number Conversions</a>
+              <a class="btn" href="/bitwise.html" data-ripple>Bitwise Ops</a>
+            </div>
+
+            <div class="mt-6 text-sm text-muted">
+              <span class="badge">New</span> Interactive step-by-step animations • Keyboard friendly • Theme support
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Feature tiles -->
+        <div class="tiles grid gap-4">
+          <div class="tile card p-6 rounded-xl hover-tilt" data-href="/numberConversions.html" tabindex="0"
+            role="button" aria-pressed="false">
+            <h3 class="font-semibold">Number Conversions</h3>
+            <p class="text-sm text-muted mt-2">Convert between binary, octal, decimal and hex with steps and examples.
+            </p>
+          </div>
+
+          <div class="tile card p-6 rounded-xl hover-tilt" data-href="/arithmetic.html" tabindex="0" role="button"
+            aria-pressed="false">
+            <h3 class="font-semibold">Arithmetic</h3>
+            <p class="text-sm text-muted mt-2">Add, subtract, multiply and divide with animated step reveal.</p>
+          </div>
+
+          <div class="tile card p-6 rounded-xl hover-tilt" data-href="/bitwise.html" tabindex="0" role="button"
+            aria-pressed="false">
+            <h3 class="font-semibold">Bitwise Operations</h3>
+            <p class="text-sm text-muted mt-2">Learn AND / OR / XOR with bit-level visualizations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="p-6 text-center text-sm text-muted">
+    © <span id="year"></span> Sci-Calc — built with care. <span class="ml-2">Made for learning.</span>
+  </footer>
+
+  <!-- existing site script injects navbar & theme toggles -->
+  <script src="js/script.js" defer></script>
+
+  <!-- page micro-interactions -->
+  <script src="js/index.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+/* arithmetic-style for number conversions page (based on your arithmetic.css) */
+
+:root {
+  --primary: #06b6d4; /* teal-ish */
+  --muted: #6b7280;
+}
+
+/* Utility focus-visible for keyboard users */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 3px solid rgba(6,182,212,0.18);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Buttons (daisyUI / Tailwind adapters still apply) */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform 160ms cubic-bezier(.2,.9,.3,1), box-shadow 160ms;
+  user-select: none;
+}
+.btn:active { transform: translateY(1px) scale(.995); }
+.btn:hover { box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06); }
+
+/* Primary variant */
+.btn-primary {
+  background: linear-gradient(180deg, var(--primary), #0496a2);
+  color: white;
+}
+
+/* Ripple element */
+.ripple {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(6,182,212,0.18);
+  transform: scale(0);
+  opacity: 1;
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation: rippleAnim 520ms cubic-bezier(.2,.9,.3,1);
+}
+@keyframes rippleAnim {
+  to { transform: scale(1); opacity: 0; }
+}
+
+/* Result animation helper */
+.result-pulse {
+  transform-origin: center;
+  animation: resultPulse 420ms cubic-bezier(.2,.9,.3,1);
+}
+@keyframes resultPulse {
+  0% { transform: scale(.98); opacity: 0.85; }
+  60% { transform: scale(1.02); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Steps simple styling */
+.steps p {
+  margin: 6px 0;
+  padding-left: 8px;
+  border-left: 2px solid rgba(0,0,0,0.04);
+  color: var(--muted);
+}
+
+/* visually hidden helper (skip link) */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.sr-only.focus\:not-sr-only:focus { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ripple, .result-pulse { animation: none !important; transition: none !important; }
+}
+
+/* ---- small page-specific helpers for number conversions ---- */
+
+/* Cards / panels */
+.card, .calc-block {
+  background: rgba(255,255,255,0.85); /* light card by default; daisyUI/dark will override */
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+/* Match arithmetic appearance in dark/light themes (use data-theme or .dark to adjust if needed) */
+html[data-theme="synthwave"] .card,
+.dark .card {
+  background: rgba(17,24,39,0.6); /* semi-transparent dark card similar to arithmetic */
+  color: #e6eef5;
+}
+
+/* Make selects non-transparent and visible */
+.select {
+  background-color: rgba(255,255,255,0.95);
+  border: 1px solid rgba(0,0,0,0.06);
+  color: #0f172a;
+  padding: .5rem .75rem;
+  border-radius: 8px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* In dark theme make selects darker and readable */
+html[data-theme="synthwave"] .select,
+.dark .select {
+  background-color: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #e6eef5;
+}
+
+/* Inputs */
+.input {
+  background-color: rgba(255,255,255,0.95);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: .5rem .75rem;
+  border-radius: 8px;
+  color: #0f172a;
+}
+html[data-theme="synthwave"] .input,
+.dark .input {
+  background-color: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #e6eef5;
+}
