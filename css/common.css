@@ -3,6 +3,23 @@
    Do NOT remove — used by DaisyUI + custom components
 ===================================================== */
 
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+section {
+  margin-bottom: 3rem;
+}
+
+/* Prevent Tailwind grays from breaking theme */
+.text-gray-500,
+.text-gray-600,
+.text-gray-900 {
+  color: var(--text-muted);
+}
+
 :root {
   /* Backgrounds */
   --bg-main: #ffffff;
@@ -18,9 +35,11 @@
   --card-border: rgba(0, 0, 0, 0.08);
 
   /* Brand / Accent */
-  --primary: #06b6d4;
+  /* --primary: #06b6d4; */
+  --primary: #4f46e5;
   --primary-rgb: 6, 182, 212;
-  --primary-hover: #0891b2;
+  /* --primary-hover: #0891b2; */
+  --primary-hover: #4f46e5;
   --primary-soft: rgba(6, 182, 212, 0.15);
 
   /* Borders & Shadows */
@@ -44,6 +63,7 @@
   --font-size-2xl: 1.5rem;
   --font-size-3xl: 1.875rem;
   --font-size-4xl: 2.25rem;
+
 }
 
 /* Base reset + sensible defaults */
@@ -52,11 +72,11 @@ html, body { height: 100%; }
 body {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(14px, 1.6vw, 16px);
-  line-height: 1.5;
+  line-height: 1.6;
   background: var(--bg-main);
   color: var(--text-main);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale;    
 }
 
 /* Container to center page content */
@@ -66,6 +86,20 @@ body {
   margin-right: auto;
   padding-left: var(--spacing-md);
   padding-right: var(--spacing-md);
+}
+
+h1, h2, h3 {
+  line-height: 1.25;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.25rem; }
+h3 { font-size: 1rem; }
+
+p {
+  color: var(--text-muted);
 }
 
 /* Accessible button base */
@@ -78,8 +112,8 @@ input, textarea, select {
   padding: 0.6rem 0.75rem;
   border: 1px solid var(--border-soft);
   border-radius: 8px;
-  background: transparent;
-  color: var(--text-main);
+  background: white;
+  color: black;
   transition: border-color 120ms ease, box-shadow 120ms ease;
 }
 input:focus, textarea:focus, select:focus {
@@ -97,7 +131,7 @@ input:focus, textarea:focus, select:focus {
    DARK THEME TOKENS (EXCLUDING NAVBAR)
 ===================================================== */
 
-html[data-theme="synthwave"] body {
+html[data-theme="synthwave"] {
   --bg-main: #0f172a;
   --bg-secondary: #020617;
 
@@ -108,9 +142,11 @@ html[data-theme="synthwave"] body {
   --card-bg: rgba(15, 23, 42, 0.96);
   --card-border: rgba(255, 255, 255, 0.08);
 
-  --primary: #22d3ee;
+  /* --primary: #22d3ee; */
+  --primary: #4f46e5;
   --primary-rgb: 34, 211, 238;
-  --primary-hover: #67e8f9;
+  /* --primary-hover: #67e8f9; */
+  --primary-hover: #4f46e5;
   --primary-soft: rgba(34, 211, 238, 0.18);
 
   --border-soft: rgba(255, 255, 255, 0.08);
@@ -122,12 +158,15 @@ html[data-theme="synthwave"] body {
    DARK THEME BASE APPLICATION
 ===================================================== */
 
-html[data-theme="synthwave"],
+
+html[data-theme="synthwave"] {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
 html[data-theme="synthwave"] body {
   background-color: var(--bg-main);
   color: var(--text-main);
 }
-
 
 /* =====================================================
    FORCE LIGHT THEME (OVERRIDES DEVICE / DAISYUI)
@@ -149,7 +188,7 @@ html[data-theme="light"] body {
 
 .calc-block,
 .card {
-  background: linear-gradient(
+    background: linear-gradient(
     135deg,
     var(--card-bg) 0%,
     rgba(var(--primary-rgb), 0.02) 100%
@@ -158,8 +197,9 @@ html[data-theme="light"] body {
   border: 1px solid var(--card-border);
   border-top: 2px solid var(--primary-soft);
   border-radius: 12px;
+  padding: 1.25rem;
   box-shadow: var(--shadow-soft);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform .2s ease, box-shadow .2s ease;
   position: relative;
   overflow: hidden;
 }
@@ -222,4 +262,80 @@ footer h6 {
   color: var(--text-main);
   font-weight: 600;
   margin-bottom: var(--spacing-sm);
+}
+
+/* =====================================================
+   SIMPLE THEME TOGGLE
+===================================================== */
+
+.theme-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 42px;
+  height: 24px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-switch .slider {
+  position: absolute;
+  inset: 0;
+  background-color: #e5e7eb;
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+}
+
+.theme-switch .slider::before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  top: 3px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+/* Checked = Dark mode */
+.theme-switch input:checked + .slider {
+  background-color: var(--primary);
+}
+
+.theme-switch input:checked + .slider::before {
+  transform: translateX(18px);
+}
+
+/* Focus accessibility */
+.theme-switch input:focus-visible + .slider {
+  outline: 2px dashed var(--primary);
+  outline-offset: 3px;
+}
+
+/* Dark mode background tweak */
+html[data-theme="synthwave"] .theme-switch .slider {
+  background-color: #334155;
+}
+
+.theme-switch .slider::after {
+  content: "☾";
+  position: absolute;
+  right: 6px;
+  top: 3px;
+  font-size: 12px;
+  color: black;
+  opacity: 0.7;
+}
+
+.theme-switch input:not(:checked) + .slider::after {
+  content: "☀";
+  left: 6px;
+  right: auto;
+  color: black;
 }

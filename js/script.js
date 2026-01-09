@@ -13,13 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const NAV_HTML = `
 <nav class="navbar shadow-sm p-3" aria-label="Main navigation">
   <div class="navbar-start">
-    <button id="mobile-menu-button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu"
-            class="btn btn-ghost lg:hidden">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
-      </svg>
-    </button>
-    <a class="btn btn-ghost text-xl" href="/" aria-label="ConverTo homepage">ConverTo</a>
+    <a class="btn btn-ghost text-xl" href="/" aria-label="BinaryNbeyond homepage">BinaryNbeyond</a>
   </div>
 
   <div id="mobile-menu" class="navbar-center hidden lg:flex">
@@ -38,18 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 
   <div class="navbar-end">
-    <label class="flex cursor-pointer gap-2 items-center" for="theme-toggle">
-      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="5" />
-        <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-      </svg>
-
-      <input id="theme-toggle" type="checkbox" class="toggle theme-controller" aria-label="Toggle theme" />
-      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-      </svg>
+    <label class="theme-switch">
+      <input id="theme-toggle" type="checkbox" aria-label="Toggle dark mode">
+      <span class="slider"></span>
     </label>
   </div>
 </nav>
@@ -115,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ✅ Toggle affects ALL pages */
   if (themeCheckbox) {
     themeCheckbox.addEventListener('change', (e) => {
-      const theme = e.target.checked ? DARK_THEME : LIGHT_THEME;
+      const theme = e.target.checked ?   DARK_THEME : LIGHT_THEME;
       applyTheme(theme);
 
       try {
@@ -123,6 +108,22 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (e) { }
     });
   }
+
+  /* --------------------------
+   Cross-page / cross-tab sync
+   -------------------------- */
+  window.addEventListener('storage', (event) => {
+    if (event.key !== THEME_KEY) return;
+
+    const newTheme = event.newValue || LIGHT_THEME;
+
+    applyTheme(newTheme);
+
+    if (themeCheckbox) {
+      themeCheckbox.checked = (newTheme === DARK_THEME);
+    }
+  });
+
 
 
   /* --------------------------
