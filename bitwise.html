@@ -2,20 +2,6 @@
 <html lang="en">
 
 <head>
-  <!-- <script>
-    (function () {
-      const THEME = "light";
-
-      // Always force light theme
-      document.documentElement.setAttribute("data-theme", THEME);
-
-      // Optional: clear old stored theme to avoid confusion
-      try {
-        localStorage.removeItem("site-theme");
-      } catch (e) { }
-    })();
-  </script> -->
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Bitwise Operations</title>
@@ -68,7 +54,7 @@
 
       <div class="mt-4 flex gap-3">
         <button class="btn btn-primary" data-action="bitwise-calc">Calculate</button>
-        <button class="btn" data-action="bitwise-clear">Clear</button>
+        <button class="btn initial-color" data-action="bitwise-clear">Clear</button>
       </div>
 
       <hr class="my-4" />
@@ -106,9 +92,9 @@
         start</p>
 
       <div class="mt-4 flex gap-3">
-        <button class="btn" data-action="bitwise-new-question">New Question</button>
-        <button class="btn" data-action="bitwise-check-answer">Check Answer</button>
-        <button class="btn" data-action="bitwise-show-steps">Show Steps</button>
+        <button class="btn initial-color" data-action="bitwise-new-question">New Question</button>
+        <button class="btn initial-color" data-action="bitwise-check-answer">Check Answer</button>
+        <button class="btn initial-color" data-action="bitwise-show-steps">Show Steps</button>
       </div>
 
       <div id="bitwisePracticeResult" class="mt-3"></div>

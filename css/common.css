@@ -16,8 +16,13 @@ section {
 /* Prevent Tailwind grays from breaking theme */
 .text-gray-500,
 .text-gray-600,
-.text-gray-900 {
+.text-gray-700 {
   color: var(--text-muted);
+}
+
+.text-gray-900,
+.text-gray-800 {
+  color: var(--text-main);
 }
 
 :root {
@@ -26,7 +31,7 @@ section {
   --bg-secondary: #f9fafb;
 
   /* Text */
-  --text-main: #111827;
+  --text-main: #0f172a;
   --text-muted: #6b7280;
   --text-invert: #ffffff;
 
@@ -37,10 +42,10 @@ section {
   /* Brand / Accent */
   /* --primary: #06b6d4; */
   --primary: #4f46e5;
-  --primary-rgb: 6, 182, 212;
+  /* --primary-rgb: 6, 182, 212; */
   /* --primary-hover: #0891b2; */
-  --primary-hover: #4f46e5;
-  --primary-soft: rgba(6, 182, 212, 0.15);
+  --primary-hover: #4338ca;
+  /* --primary-soft: rgba(6, 182, 212, 0.15); */
 
   /* Borders & Shadows */
   --border-soft: rgba(0, 0, 0, 0.06);
@@ -98,7 +103,7 @@ h1 { font-size: 1.75rem; }
 h2 { font-size: 1.25rem; }
 h3 { font-size: 1rem; }
 
-p {
+p, span, li {
   color: var(--text-muted);
 }
 
@@ -268,7 +273,7 @@ footer h6 {
    SIMPLE THEME TOGGLE
 ===================================================== */
 
-.theme-switch {
+/* .theme-switch {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -301,41 +306,123 @@ footer h6 {
   border-radius: 50%;
   transition: transform 0.2s ease;
   box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-}
+} */
 
 /* Checked = Dark mode */
-.theme-switch input:checked + .slider {
+/* .theme-switch input:checked + .slider {
   background-color: var(--primary);
 }
 
 .theme-switch input:checked + .slider::before {
-  transform: translateX(18px);
-}
+  transform: translateX(18px); */
+/* } */
 
 /* Focus accessibility */
-.theme-switch input:focus-visible + .slider {
+/* .theme-switch input:focus-visible + .slider {
   outline: 2px dashed var(--primary);
   outline-offset: 3px;
-}
+} */
 
 /* Dark mode background tweak */
-html[data-theme="synthwave"] .theme-switch .slider {
+/* html[data-theme="synthwave"] .theme-switch .slider {
   background-color: #334155;
+}
+
+.theme-switch {
+  position: relative;
+}
+
+.theme-switch .slider {
+  position: relative;
 }
 
 .theme-switch .slider::after {
   content: "☾";
   position: absolute;
+  top: 50%;
   right: 6px;
-  top: 3px;
-  font-size: 12px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  line-height: 1;
   color: black;
-  opacity: 0.7;
+  opacity: 0.8;
+  transition: all 0.3s ease;
 }
 
 .theme-switch input:not(:checked) + .slider::after {
   content: "☀";
   left: 6px;
   right: auto;
+  transform: translateY(-50%);
   color: black;
+} */
+
+/* unify accent colors */
+a {
+  color: var(--primary);
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+button,
+.btn {
+  color: inherit;
+}
+
+/* .inherited-color{
+  color: inherit;
+} */
+
+.initial-color{
+  color: initial;
+}
+
+option {
+  /* background-color: #020617; */
+  color: black;
+}
+
+/* =====================================================
+   DARK MODE FORM CONTROLS FIX
+===================================================== */
+
+html[data-theme="synthwave"] .input,
+html[data-theme="synthwave"] .textarea {
+  background-color: var(--bg-main);          /* dark surface */
+  color: #e5e7eb;                     /* light text */
+  border-color: rgba(255,255,255,0.12);
+}
+
+html[data-theme="synthwave"] .input::placeholder,
+html[data-theme="synthwave"] .textarea::placeholder {
+  color: #9ca3af;
+}
+
+html[data-theme="synthwave"] .select {
+    background-color: var(--bg-main);         /* dark surface */
+    color: var(--text-main);
+}
+
+html[data-theme="synthwave"] .select option {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+html[data-theme="synthwave"] .select option:hover{
+  color: var(--primary-hover);
+}
+
+/* Focus state */
+html[data-theme="synthwave"] .input:focus,
+html[data-theme="synthwave"] .select:focus,
+html[data-theme="synthwave"] .textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(79,70,229,0.35);
+}
+
+html[data-theme="synthwave"] .input,
+html[data-theme="synthwave"] .select {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
 }

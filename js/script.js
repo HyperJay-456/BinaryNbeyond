@@ -12,54 +12,59 @@ document.addEventListener('DOMContentLoaded', () => {
      -------------------------- */
   const NAV_HTML = `
 <nav class="navbar shadow-sm p-3" aria-label="Main navigation">
-  <div class="navbar-start">
-    <a class="btn btn-ghost text-xl" href="/" aria-label="BinaryNbeyond homepage">BinaryNbeyond</a>
-  </div>
+        <div class="navbar-start">
+            <a class="inherited-color btn btn-ghost text-xl" href="/" aria-label="BinaryNbeyond homepage">BinaryNbeyond</a>
+        </div>
 
-  <div id="mobile-menu" class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal px-1" role="menubar" aria-label="Primary navigation">
-      <li role="none"><a role="menuitem" href="/" class="px-2">Home</a></li>
-      <li role="none"><a role="menuitem" href="/team.html" class="px-2">Team</a></li>
-      <li role="none" class="relative">
-        <button id="features-button" aria-expanded="false" aria-controls="features-menu" aria-haspopup="true">Features</button>
-        <ul id="features-menu" role="menu" class="p-2 bg-base-100 w-40 z-50 hidden absolute mt-2 rounded-box shadow">
-          <li role="none"><a role="menuitem" href="/arithmetic.html" class="block px-2 py-1">Arithmetic</a></li>
-          <li role="none"><a role="menuitem" href="/bitwise.html" class="block px-2 py-1">Bitwise</a></li>
-          <li role="none"><a role="menuitem" href="/numberConversions.html" class="block px-2 py-1">Number Conversions</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-
-  <div class="navbar-end">
-    <label class="theme-switch">
-      <input id="theme-toggle" type="checkbox" aria-label="Toggle dark mode">
-      <span class="slider"></span>
-    </label>
-  </div>
-</nav>
+        <div id="mobile-menu" class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1" role="menubar" aria-label="Primary navigation">
+                <li role="none"><a role="menuitem" href="/" class="px-2">Home</a></li>
+                <li role="none"><a role="menuitem" href="/team.html" class="px-2">Team</a></li>
+                <li role="none" class="relative">
+                    <button id="features-button" aria-expanded="false" aria-controls="features-menu"
+                        aria-haspopup="true">Features</button>
+                    <ul id="features-menu" role="menu"
+                        class="p-2 bg-base-100 w-40 z-50 hidden absolute mt-2 rounded-box shadow">
+                        <li role="none"><a role="menuitem" href="/arithmetic.html"
+                                class="block px-2 py-1">Arithmetic</a></li>
+                        <li role="none"><a role="menuitem" href="/bitwise.html" class="block px-2 py-1">Bitwise</a></li>
+                        <li role="none"><a role="menuitem" href="/numberConversions.html" class="block px-2 py-1">Number
+                                Conversions</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-end">     
+          <label class="flex cursor-pointer gap-2 items-center" for="theme-toggle">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path>
+            </svg>
+            <input id="theme-toggle" type="checkbox" class="toggle theme-controller" aria-label="Toggle theme">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </label>
+        </div>
+    </nav>
 `;
 
-  const FOOTER_HTML = `
+const FOOTER_HTML = `
 <footer class="footer sm:footer-horizontal bg-base-400 text-base-content p-6 mt-8" aria-label="Site footer">
   <nav>
     <h6 class="footer-title">Services</h6>
-    <a class="link link-hover" href="/branding.html">Branding</a>
-    <a class="link link-hover" href="/design.html">Design</a>
-    <a class="link link-hover" href="/marketing.html">Marketing</a>
+    <a class="link link-hover" href="/webdevelopment.html">Web Development</a>
   </nav>
   <nav>
     <h6 class="footer-title">Company</h6>
-    <a class="link link-hover" href="/about.html">About us</a>
-    <a class="link link-hover" href="/contact.html">Contact</a>
+    <a class="link link-hover" href="/about.html">About this Website</a>
+    <a class="link link-hover" href="/team.html">Contact</a>
   </nav>
   <nav>
     <h6 class="footer-title">Social</h6>
-    <div class="grid grid-flow-col gap-4">
-      <a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="Twitter">Twitter</a>
-      <a href="https://youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a>
-      <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
-    </div>
+      <a href="https://x.com/BinaryNBeyond" target="_blank" rel="noopener" aria-label="X">X</a>
+      <a href="https://www.youtube.com/@binarynbeyond-b7f" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a>
+      <a href="https://www.instagram.com/beyond_n_binary/?igsh=eGJjZDQxY3NlNnNh#" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
   </nav>
 </footer>
 `;
