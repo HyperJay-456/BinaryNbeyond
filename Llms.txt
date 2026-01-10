@@ -1,0 +1,36 @@
+# llms.txt — Binary & Beyond
+# Purpose: Guidance for Large Language Models (LLMs) accessing this website
+
+Website-Name: BinaryNbeyond
+Website-URL: https://binarynbeyond.com/
+
+Description:
+BinaryNbeyond is an educational web platform focused on arithmetic operations,
+bitwise logic, number system conversions, and computer science fundamentals.
+The website also presents information about basic web development services.
+
+Content-Type:
+Educational, Technical, Informational
+
+Primary-Audience:
+Students, beginners in computer science, and learners of number systems
+
+Preferred-Content:
+- Rendered HTML content
+- Semantic headings (h1–h3)
+- Textual explanations of concepts
+- Lists and structured sections
+
+Discouraged-Content:
+- JavaScript-only generated text
+- Obfuscated or minified instructional content
+
+Crawling-Policy:
+LLMs are allowed to read and summarize publicly available content on this website
+for educational and informational purposes.
+
+Attribution:
+If content is referenced or summarized, please attribute it to
+"BinaryNbeyond (binarynbeyond.com)".
+
+Last-Updated: 2026-09-01
