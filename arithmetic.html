@@ -10,20 +10,33 @@
     gtag('config', 'G-2NKRTM6JXC');
   </script>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arithmetic Operation</title>
+  <title>Arithmetic Operations (Binary & Decimal) | BinaryNBeyond</title>
+  <meta name="description" content="Perform step-by-step arithmetic operations (addition, subtraction via 2's complement, multiplication, division) in binary and decimal with interactive animations." />
+  <link rel="canonical" href="https://binarynbeyond.com/arithmetic.html" />
+  <meta property="og:title" content="Arithmetic Operations | BinaryNBeyond" />
+  <meta property="og:description" content="Step-by-step binary and decimal arithmetic calculations with interactive practice mode." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://binarynbeyond.com/arithmetic.html" />
+
   <!-- tailwind ui utilites -->
   <link rel="icon" type="image/x-icon" href="logo.webp">
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/arithmetic.css">
-  <style>
-    /* small fallback font & layout tweak */
-    body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-  </style>
+
+  <!-- Prevent FOUC: Apply theme before DaisyUI renders -->
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme') || 'synthwave';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      if (savedTheme === 'synthwave') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
        <!-- your existing conversion scripts (defer them) -->
   <script src="js/conversions/validations.js" defer></script>
   <script src="js/conversions/binaryAddition.js" defer></script>
@@ -31,25 +44,43 @@
   <script src="js/conversions/animateSteps.js" defer></script>
   <script src="js/arithmetic/arithmetic.js" defer></script>
 
+  <!-- UI controller for arithmetic page -->
+  <script src="js/arithmetic-ui.js" defer></script>
+
   <!-- enhanced site script: inject navbar/footer, theme, microinteractions -->
   <script src="js/script.js" defer></script>
 </head>
 
-<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-  <!-- skip link for keyboard users -->
-  <a class="sr-only focus:not-sr-only" href="#main">Skip to content</a>
-
+<body class="bg-main text-main">
   <!-- navbar / footer are injected by js/script.js -->
   <div id="navbar"></div>
 
-  <main id="main" class="max-w-4xl mx-auto p-6">
+  <main id="main" class="max-w-4xl mx-auto pt-24 pb-12 px-4 sm:px-6">
+    <header class="mb-8 text-center sm:text-left">
+      <div class="badge-glow mb-2">Textbook Engine</div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Arithmetic Operations</h1>
+      <p class="text-sm text-muted">Perform binary and decimal calculations with transparent 2's complement and carry-propagation tracing.</p>
+    </header>
+
     <section class="mb-8">
-      <div class="calc-block card p-6 shadow-sm rounded-lg">
-        <h2 class="text-lg font-semibold mb-4">Arithmetic Operations (Binary & Decimal)</h2>
+      <div class="card p-6 sm:p-8 rounded-2xl shadow-xl">
+        <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+          <span>Binary & Decimal Calculation</span>
+        </h2>
+
+        <!-- Quick Presets -->
+        <div class="mb-5 flex flex-wrap items-center gap-2">
+          <span class="text-xs font-mono font-semibold uppercase text-muted tracking-wider">Quick Presets:</span>
+          <button type="button" class="tag-item hover:border-indigo-500 hover:text-indigo-400 cursor-pointer transition-colors" data-arith-preset="bin-sub">1010 − 0011 (2's Comp)</button>
+          <button type="button" class="tag-item hover:border-indigo-500 hover:text-indigo-400 cursor-pointer transition-colors" data-arith-preset="bin-neg">11 − 101 (Negative)</button>
+          <button type="button" class="tag-item hover:border-indigo-500 hover:text-indigo-400 cursor-pointer transition-colors" data-arith-preset="bin-add">1011 + 0110 (Add)</button>
+          <button type="button" class="tag-item hover:border-indigo-500 hover:text-indigo-400 cursor-pointer transition-colors" data-arith-preset="dec-div">14 ÷ 4 (Remainder)</button>
+        </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end">
           <div>
-            <label for="numberSystem" class="block text-sm">Number System</label>
+            <label for="numberSystem" class="block text-sm mb-1 font-semibold">Number System</label>
             <select id="numberSystem" class="select w-full">
               <option value="decimal">Decimal</option>
               <option value="binary">Binary</option>
@@ -57,7 +88,7 @@
           </div>
 
           <div>
-            <label for="operation" class="block text-sm">Operation</label>
+            <label for="operation" class="block text-sm mb-1 font-semibold">Operation</label>
             <select id="operation" class="select w-full">
               <option value="add">Addition (+)</option>
               <option value="sub">Subtraction (−)</option>
@@ -67,20 +98,21 @@
           </div>
 
           <div>
-            <label for="num1" class="block text-sm">First Number</label>
-            <input id="num1" class="input w-full" inputmode="numeric" />
+            <label for="num1" class="block text-sm mb-1 font-semibold">First Number</label>
+            <input id="num1" class="input w-full font-mono" inputmode="numeric" placeholder="e.g. 1010" />
           </div>
 
           <div>
-            <label for="num2" class="block text-sm">Second Number</label>
-            <input id="num2" class="input w-full" inputmode="numeric" />
+            <label for="num2" class="block text-sm mb-1 font-semibold">Second Number</label>
+            <input id="num2" class="input w-full font-mono" inputmode="numeric" placeholder="e.g. 0011" />
           </div>
         </div>
 
-        <div class="mt-4 flex gap-3">
+        <div class="mt-4 flex flex-wrap gap-2.5 items-center">
           <!-- use data-action attributes instead of inline onclick -->
           <button class="btn btn-primary" data-action="calculate">Calculate</button>
-          <button class="btn initial-color" data-action="clear-inputs">Clear</button>
+          <button class="btn btn-outline" data-action="swap-operands" title="Swap Number 1 and Number 2">⇄ Swap</button>
+          <button class="btn btn-outline" data-action="clear-inputs">Clear</button>
         </div>
 
         <hr class="my-4">
@@ -89,26 +121,29 @@
         <div id="arithResult" class="mt-2 text-lg font-semibold transition-transform will-change-transform"></div>
 
         <h3 class="mt-4 text-md font-medium">Step-by-Step Solution</h3>
-        <div id="arithSteps" class="steps mt-2"></div>
+        <div id="arithSteps" class="mt-2 space-y-2 font-mono text-sm"></div>
 
         <div id="arithError" class="mt-3 text-sm text-red-600" role="alert" aria-live="polite"></div>
       </div>
     </section>
 
     <section>
-      <div class="calc-block card p-6 shadow-sm rounded-lg">
-        <h2 class="text-lg font-semibold mb-4">Practice Mode – Arithmetic Operations</h2>
+      <div class="card p-6 sm:p-8 rounded-2xl shadow-xl">
+        <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+          <span>Practice Mode – Arithmetic Operations</span>
+        </h2>
 
-        <p id="arithPracticeQuestion" class="mb-3">Click "New Question" to start practice</p>
+        <p id="arithPracticeQuestion" class="mb-3 text-sm text-muted">Click "New Question" to start practice</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label class="block text-sm">Your Answer</label>
-            <input id="arithPracticeAnswer" class="input w-full" />
+            <label class="block text-sm mb-1">Your Answer</label>
+            <input id="arithPracticeAnswer" class="input w-full font-mono" />
           </div>
 
           <div>
-            <label class="block text-sm">Difficulty</label>
+            <label class="block text-sm mb-1">Difficulty</label>
             <select id="arithDifficulty" class="select w-full">
               <option value="easy">Easy</option>
               <option value="medium">Medium</option>
@@ -117,19 +152,20 @@
           </div>
         </div>
 
-        <div class="mt-4 flex gap-3">
-          <button class="btn initial-color" data-action="new-question">New Question</button>
-          <button class="btn initial-color" data-action="check-answer">Check Answer</button>
-          <button class="btn initial-color" data-action="show-steps">Show Steps</button>
+        <div class="mt-4 flex flex-wrap gap-2.5">
+          <button class="btn btn-outline" data-action="new-question">New Question</button>
+          <button class="btn btn-primary" data-action="check-answer">Check Answer</button>
+          <button class="btn btn-outline" data-action="show-steps">Show Steps</button>
         </div>
 
         <div id="arithPracticeResult" class="mt-3"></div>
 
-        <h3 class="mt-4 text-md font-medium">Step-by-Step Solution</h3>
-        <div id="arithPracticeSteps" class="steps mt-2"></div>
+        <h3 class="mt-4 text-sm font-semibold uppercase tracking-wider text-muted font-mono">Step-by-Step Solution</h3>
+        <div id="arithPracticeSteps" class="mt-2 space-y-2 font-mono text-sm"></div>
       </div>
     </section>
   </main>
-  <footer id="footer"></footer>
+  <div id="footer"></div>
+</body>
 
 </html>

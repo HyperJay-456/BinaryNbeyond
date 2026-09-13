@@ -8,28 +8,11 @@ function generateRandomNumber(base) {
             return Math.floor(Math.random() * 64).toString(8);
         case "hexadecimal":
             return Math.floor(Math.random() * 255).toString(16).toUpperCase();
+        default:
+            return "0";
     }
 }
 
-function checkPracticeAnswer() {
-    const studentAnswer = document.getElementById("practiceAnswer").value.trim();
-
-    if (!currentQuestion) return;
-
-    const toDecimal = baseToDecimal(
-        currentQuestion.number,
-        currentQuestion.fromBase
-    );
-
-    const correct = decimalToBase(
-        toDecimal.result,
-        currentQuestion.toBase
-    ).result;
-
-    if (studentAnswer.toUpperCase() === correct.toUpperCase()) {
-        document.getElementById("practiceResult").innerText = "✅ Correct!";
-    } else {
-        document.getElementById("practiceResult").innerText =
-            `❌ Incorrect. Correct Answer: ${correct}`;
-    }
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = { generateRandomNumber };
 }

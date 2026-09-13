@@ -11,59 +11,99 @@
   </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bitwise Operations</title>
+  <title>Bitwise Operations (AND, OR, XOR, NOT, Shift) | BinaryNBeyond</title>
+  <meta name="description" content="Visualize and calculate bitwise AND, OR, XOR, NOT, Left Shift, and Right Shift operations with interactive bit-level step-by-step explanations and practice mode." />
+  <link rel="canonical" href="https://binarynbeyond.com/bitwise.html" />
+  <meta property="og:title" content="Bitwise Operations | BinaryNBeyond" />
+  <meta property="og:description" content="Interactive visual bitwise calculator for AND, OR, XOR, NOT, and shift operations." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://binarynbeyond.com/bitwise.html" />
 
-  <!-- daisyUI / Tailwind (keep your existing kit if you prefer) -->
+  <!-- daisyUI / Tailwind -->
   <link rel="icon" type="image/x-icon" href="logo.webp">
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/bitwise.css">
+
+  <!-- Prevent FOUC: Apply theme before DaisyUI renders -->
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme') || 'synthwave';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      if (savedTheme === 'synthwave') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
 
-<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-  <a class="sr-only focus:not-sr-only" href="#main">Skip to content</a>
-
+<body class="bg-main text-main">
   <!-- navbar injected by js/script.js -->
   <div id="navbar"></div>
 
-  <main id="main" class="max-w-4xl mx-auto p-6">
-    <section class="card p-6 shadow-sm rounded-lg mb-8 bg-white/80 dark:bg-gray-800/60">
-      <h1 class="text-2xl font-semibold mb-4">Bitwise Operations (AND / OR / XOR)</h1>
+  <main id="main" class="max-w-4xl mx-auto pt-24 pb-12 px-4 sm:px-6">
+    <header class="mb-8 text-center sm:text-left">
+      <div class="badge-glow badge-cyan mb-2">Register Level</div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Bitwise Logic Studio</h1>
+      <p class="text-sm text-muted">Compute hardware bitwise masks, logical operations, and binary shifts with interactive register breakdowns.</p>
+    </header>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div>
-          <label class="block text-sm mb-1">Number System</label>
-          <select id="bitwiseSystem" class="select w-full">
-            <option value="binary">Binary</option>
-            <option value="decimal">Decimal</option>
-          </select>
+    <section class="card p-6 sm:p-8 rounded-2xl shadow-xl mb-8">
+      <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+        <span>Logical & Shift Operations</span>
+      </h2>
+
+        <!-- Quick Presets -->
+        <div class="mb-5 flex flex-wrap items-center gap-2">
+          <span class="text-xs font-mono font-semibold uppercase text-muted tracking-wider">Quick Presets:</span>
+          <button type="button" class="tag-item hover:border-cyan-400 hover:text-cyan-400 cursor-pointer transition-colors" data-bit-preset="and">12 & 10 (AND)</button>
+          <button type="button" class="tag-item hover:border-cyan-400 hover:text-cyan-400 cursor-pointer transition-colors" data-bit-preset="or">12 | 10 (OR)</button>
+          <button type="button" class="tag-item hover:border-cyan-400 hover:text-cyan-400 cursor-pointer transition-colors" data-bit-preset="xor">12 ^ 10 (XOR)</button>
+          <button type="button" class="tag-item hover:border-cyan-400 hover:text-cyan-400 cursor-pointer transition-colors" data-bit-preset="not">~5 (NOT)</button>
+          <button type="button" class="tag-item hover:border-cyan-400 hover:text-cyan-400 cursor-pointer transition-colors" data-bit-preset="shl">5 &lt;&lt; 2 (Shift)</button>
         </div>
 
-        <div>
-          <label class="block text-sm mb-1">Operation</label>
-          <select id="bitwiseOperation" class="select w-full">
-            <option value="and">AND</option>
-            <option value="or">OR</option>
-            <option value="xor">XOR</option>
-          </select>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-sm mb-1 font-semibold">Number System</label>
+            <select id="bitwiseSystem" class="select w-full">
+              <option value="binary">Binary</option>
+              <option value="decimal">Decimal</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm mb-1 font-semibold">Operation</label>
+            <select id="bitwiseOperation" class="select w-full">
+              <option value="and">AND (&amp;)</option>
+              <option value="or">OR (|)</option>
+              <option value="xor">XOR (^)</option>
+              <option value="not">NOT (~)</option>
+              <option value="shl">Left Shift (&lt;&lt;)</option>
+              <option value="shr">Right Shift (&gt;&gt;)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm mb-1 font-semibold">First Number</label>
+            <input id="bitwiseNum1" class="input w-full font-mono" inputmode="numeric" placeholder="e.g. 12" />
+          </div>
+
+          <div>
+            <label class="block text-sm mb-1 font-semibold">Second Number</label>
+            <input id="bitwiseNum2" class="input w-full font-mono" inputmode="numeric" placeholder="e.g. 10" />
+          </div>
         </div>
 
-        <div>
-          <label class="block text-sm mb-1">First Number</label>
-          <input id="bitwiseNum1" class="input w-full" inputmode="numeric" />
+        <div class="mt-4 flex flex-wrap gap-2.5 items-center">
+          <button class="btn btn-primary" data-action="bitwise-calc">Calculate</button>
+          <button class="btn btn-outline" data-action="bitwise-swap" id="bitwiseSwapBtn" title="Swap Operand 1 and Operand 2">⇄ Swap</button>
+          <button class="btn btn-outline" data-action="bitwise-clear">Clear</button>
         </div>
-
-        <div>
-          <label class="block text-sm mb-1">Second Number</label>
-          <input id="bitwiseNum2" class="input w-full" inputmode="numeric" />
-        </div>
-      </div>
-
-      <div class="mt-4 flex gap-3">
-        <button class="btn btn-primary" data-action="bitwise-calc">Calculate</button>
-        <button class="btn initial-color" data-action="bitwise-clear">Clear</button>
-      </div>
 
       <hr class="my-4" />
 
@@ -71,13 +111,16 @@
       <div id="bitwiseResult" class="mt-2 text-lg font-semibold"></div>
 
       <h3 class="mt-4 text-md font-medium">Step-by-Step Solution</h3>
-      <div id="bitwiseSteps" class="steps mt-2"></div>
+      <div id="bitwiseSteps" class="mt-2 space-y-2 font-mono text-sm"></div>
 
       <div id="bitwiseError" class="mt-3 text-sm text-red-600" role="alert" aria-live="polite"></div>
     </section>
 
-    <section class="card p-6 shadow-sm rounded-lg bg-white/80 dark:bg-gray-800/60">
-      <h2 class="text-xl font-semibold mb-4">Practice Mode — Bitwise</h2>
+    <section class="card p-6 sm:p-8 rounded-2xl shadow-xl">
+      <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+        <span>Practice Mode — Bitwise Logic</span>
+      </h2>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
@@ -91,28 +134,27 @@
 
         <div>
           <label class="block text-sm mb-1">Your Answer</label>
-          <input id="bitwisePracticeAnswer" class="input w-full" inputmode="numeric"
+          <input id="bitwisePracticeAnswer" class="input w-full font-mono" inputmode="numeric"
             placeholder="Enter decimal result" />
         </div>
       </div>
 
-      <p id="bitwisePracticeQuestion" class="mt-4 text-sm text-gray-600 dark:text-gray-300">Click "New Question" to
-        start</p>
+      <p id="bitwisePracticeQuestion" class="mt-4 text-sm text-muted">Click "New Question" to start</p>
 
-      <div class="mt-4 flex gap-3">
-        <button class="btn initial-color" data-action="bitwise-new-question">New Question</button>
-        <button class="btn initial-color" data-action="bitwise-check-answer">Check Answer</button>
-        <button class="btn initial-color" data-action="bitwise-show-steps">Show Steps</button>
+      <div class="mt-4 flex flex-wrap gap-2.5">
+        <button class="btn btn-outline" data-action="bitwise-new-question">New Question</button>
+        <button class="btn btn-primary" data-action="bitwise-check-answer">Check Answer</button>
+        <button class="btn btn-outline" data-action="bitwise-show-steps">Show Steps</button>
       </div>
 
       <div id="bitwisePracticeResult" class="mt-3"></div>
 
-      <h3 class="mt-4 text-md font-medium">Practice Step-by-Step</h3>
-      <div id="bitwisePracticeSteps" class="steps mt-2"></div>
+      <h3 class="mt-4 text-sm font-semibold uppercase tracking-wider text-muted font-mono">Practice Step-by-Step</h3>
+      <div id="bitwisePracticeSteps" class="mt-2 space-y-2 font-mono text-sm"></div>
     </section>
   </main>
 
-  <footer id="footer"></footer>
+  <div id="footer"></div>
 
   <!-- optional helpers your project may use -->
   <script src="js/conversions/validations.js" defer></script>

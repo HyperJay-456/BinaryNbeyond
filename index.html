@@ -5,14 +5,14 @@
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2NKRTM6JXC"></script>
   <script>
-   window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-2NKRTM6JXC');
   </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BinaryNbeyond | Learn Number Systems & Bitwise Operations</title>
+  <title>BinaryNBeyond — Visual Number Systems & Bitwise Computing Engine</title>
 
   <!-- framework -->
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
@@ -20,94 +20,124 @@
 
   <!-- shared UI + page styles -->
   <link rel="icon" type="image/x-icon" href="logo.webp">
-  <link rel="stylesheet" href="css/common.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/index.css" />
   <link rel="canonical" href="https://binarynbeyond.com/index.html" />
 
   <meta name="description"
-    content="Binary & Beyond is an educational web platform offering arithmetic operations, bitwise logic, and number system conversions with clear, step-by-step explanations." />
+    content="BinaryNBeyond is a next-generation visual computing platform offering arithmetic operations, bitwise logic studio, and number system conversions with transparent step-by-step solutions." />
+
+  <!-- Prevent FOUC: Apply theme before DaisyUI renders -->
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme') || 'synthwave';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      if (savedTheme === 'synthwave') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
 
-<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-  <a class="sr-only focus:not-sr-only" href="#main">Skip to content</a>
-
+<body class="bg-main text-main">
   <!-- navbar will be injected by js/script.js -->
   <div id="navbar"></div>
 
-  <main id="main" class="min-h-screen flex items-center justify-center p-6">
+  <main id="main" class="min-h-[85vh] flex items-center justify-center pt-24 pb-12 px-4 sm:px-6">
     <section class="hero max-w-6xl w-full">
       <div class="hero-inner grid gap-8 md:grid-cols-2 items-center">
-        <!-- Left: Logo & CTA -->
-        <div class="hero-card card p-8 rounded-xl shadow-lg">
+        <!-- Left: Hero Card & CTA -->
+        <div class="hero-card card p-6 sm:p-8 rounded-2xl shadow-xl">
           <div class="brand flex items-center gap-4">
-            <!-- Replace src with your logo file if you have one -->
-            <img src="logo.webp" alt="Sci-Calc logo"
-              class="logo w-20 h-20 rounded-lg object-cover" />
+            <div class="flex-shrink-0">
+              <img src="logo.webp" alt="BinaryNBeyond logo" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-contain" width="80" height="80" />
+            </div>
             <div>
-              <h1 class="text-2xl md:text-3xl font-extrabold leading-tight">BinaryNbeyond</h1>
-              <p class="text-sm text-muted">Fast, visual calculators for arithmetic, bitwise ops, and base conversions.
-              </p>
+              <div class="badge-glow text-[10px] mb-1.5">Visual Computing</div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight">
+                <span class="bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-400 bg-clip-text text-transparent">BinaryNBeyond</span>
+              </h1>
+              <p class="text-xs sm:text-sm text-muted mt-0.5">Fast, visual engines for arithmetic, bitwise logic, and base conversions.</p>
             </div>
           </div>
 
           <div class="mt-6">
-            <p class="lead text-lg">
-              Simplifying scientific calculations for learners and developers.
+            <p class="lead text-base sm:text-lg leading-relaxed">
+              Demystifying low-level digital logic for computer science students and engineers.
             </p>
 
-            <div class="mt-4">
-              <p class="rotator text-xl font-semibold" aria-live="polite">
-                <span class="rotator-static">Try:</span>
+            <div class="mt-4 p-3 rounded-xl bg-base-200/50 border border-white/10 flex items-center">
+              <p class="rotator text-sm sm:text-base font-semibold" aria-live="polite">
+                <span class="text-muted text-xs uppercase tracking-wider font-mono">Interactive:</span>
                 <span id="rotatingText" class="rotating-word">Arithmetic Calculations</span>
               </p>
             </div>
 
-            <div class="mt-6 flex flex-wrap gap-3">
-              <a class="btn" href="/arithmetic.html" data-ripple>Open Arithmetic</a>
-              <a class="btn" href="/numberConversions.html" data-ripple>Number Conversions</a>
-              <a class="btn" href="/bitwise.html" data-ripple>Bitwise Ops</a>
+            <div class="mt-6 flex flex-wrap gap-2.5 sm:gap-3">
+              <a class="btn btn-primary" href="arithmetic.html" data-ripple>Arithmetic Engine</a>
+              <a class="btn btn-dark" href="bitwise.html" data-ripple>Bitwise Studio</a>
+              <a class="btn btn-outline" href="numberConversions.html" data-ripple>Base Conversions</a>
             </div>
 
-            <div class="mt-6 text-sm text-muted">
-              <span class="badge">New</span> Interactive step-by-step animations • Keyboard friendly • Theme support
+            <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-xs text-muted">
+              <span class="badge-glow text-[10px]">Client-Side</span>
+              <span>Step-by-step animations &bull; Zero latency &bull; Theme aware</span>
             </div>
           </div>
         </div>
 
-        <!-- Right: Feature tiles -->
+        <!-- Right: Feature Tiles -->
         <div class="tiles grid gap-4">
-          <div class="tile card p-6 rounded-xl hover-tilt" data-href="/numberConversions.html" tabindex="0"
-            role="button" aria-pressed="false">
-            <h3 class="font-semibold">Number Conversions</h3>
-            <p class="text-sm text-muted mt-2">Convert between binary, octal, decimal and hex with steps and examples.
+          <div class="tile card p-6 rounded-2xl hover-tilt" data-href="arithmetic.html" tabindex="0" role="button" aria-pressed="false">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+                <h3 class="font-bold text-base sm:text-lg">Arithmetic Operations</h3>
+              </div>
+              <span class="badge-glow text-[10px]">2's Complement</span>
+            </div>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed">
+              Add, subtract, multiply, and divide across binary, octal, decimal, and hex with textbook sign-bit normalization and carry tracing.
             </p>
           </div>
 
-          <div class="tile card p-6 rounded-xl hover-tilt" data-href="/arithmetic.html" tabindex="0" role="button"
-            aria-pressed="false">
-            <h3 class="font-semibold">Arithmetic</h3>
-            <p class="text-sm text-muted mt-2">Add, subtract, multiply and divide with animated step reveal.</p>
+          <div class="tile card p-6 rounded-2xl hover-tilt" data-href="bitwise.html" tabindex="0" role="button" aria-pressed="false">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+                <h3 class="font-bold text-base sm:text-lg">Bitwise Logic Studio</h3>
+              </div>
+              <span class="badge-glow badge-cyan text-[10px]">32-Bit Chips</span>
+            </div>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed">
+              Master AND, OR, XOR, NOT, Left Shift, and Right Shift with interactive hardware bit register breakdowns.
+            </p>
           </div>
 
-          <div class="tile card p-6 rounded-xl hover-tilt" data-href="/bitwise.html" tabindex="0" role="button"
-            aria-pressed="false">
-            <h3 class="font-semibold">Bitwise Operations</h3>
-            <p class="text-sm text-muted mt-2">Learn AND / OR / XOR with bit-level visualizations.</p>
+          <div class="tile card p-6 rounded-2xl hover-tilt" data-href="numberConversions.html" tabindex="0" role="button" aria-pressed="false">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+                <h3 class="font-bold text-base sm:text-lg">Number Conversions</h3>
+              </div>
+              <span class="badge-glow badge-violet text-[10px]">Radix Proofs</span>
+            </div>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed">
+              Convert between binary, octal, decimal, and hexadecimal with step-by-step division, powers of base, and worked solutions.
+            </p>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer id="footer" class="p-6 text-center text-sm text-muted">
-    © <span id="year"></span> BinaryNbeyond — built with care. <span class="ml-2">Made for learning.</span>
-  </footer>
+  <div id="footer"></div>
 
-  <!-- existing site script injects navbar & theme toggles -->
+  <!-- Site script injects navbar & theme toggles -->
   <script src="js/script.js" defer></script>
-
-  <!-- page micro-interactions -->
+  <!-- Page micro-interactions -->
   <script src="js/index.js" defer></script>
 </body>
 

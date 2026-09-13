@@ -1,194 +1,690 @@
-/* style.css — updated to match the arithmetic theme, responsive layout, and improved controls */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
-/* Theme tokens */
-:root{
-  --primary: #06b6d4;
-  --muted: #6b7280;
-  --card-bg-dark: rgba(17,24,39,0.6);
-  --card-bg-light: rgba(255,255,255,0.95);
-  --card-border-dark: rgba(255,255,255,0.06);
-  --card-border-light: rgba(0,0,0,0.06);
-  --white-border: rgba(255,255,255,0.95);
+/* =====================================================
+   ANTIGRAVITY THEME TOKENS (LIGHT & DARK MODES)
+===================================================== */
+
+:root,
+html[data-theme="light"] {
+  /* Canvas & Surfaces */
+  --bg-main: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-wash: #e2e8f0;
+
+  /* Typography */
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-invert: #ffffff;
+
+  /* Cards / Glass Panels */
+  --card-bg: rgba(255, 255, 255, 0.84);
+  --card-border: rgba(15, 23, 42, 0.08);
+  --card-border-glow: rgba(99, 102, 241, 0.3);
+
+  /* Primary (Indigo) & Accent (Cyan / Violet) */
+  --primary: #4f46e5;
+  --primary-rgb: 79, 70, 229;
+  --primary-hover: #4338ca;
+  --primary-soft: rgba(79, 70, 229, 0.09);
+  --primary-glow: rgba(79, 70, 229, 0.22);
+  --accent: #0284c7;
+  --accent-rgb: 2, 132, 199;
+  --accent-soft: rgba(2, 132, 199, 0.09);
+  --accent-violet: #7c3aed;
+  --accent-cyan: #06b6d4;
+
+  /* Borders & Shadows */
+  --border-soft: rgba(15, 23, 42, 0.08);
+  --shadow-soft: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
+  --shadow-glow: 0 0 25px -5px rgba(79, 70, 229, 0.18);
+  /* DaisyUI 5 base colors bindings */
+  --color-base-100: #ffffff;
+  --color-base-200: #f8fafc;
+  --color-base-300: #f1f5f9;
+  --color-base-content: #0f172a;
+
+  color-scheme: light;
 }
 
-/* Box sizing & base */
+/* Cosmic Obsidian Dark Mode (Default / Synthwave) */
+html[data-theme="synthwave"],
+html.dark {
+  /* Canvas & Surfaces */
+  --bg-main: #080c14;
+  --bg-secondary: #0d1322;
+  --bg-wash: #131b2e;
+
+  /* Typography */
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-invert: #080c14;
+
+  /* Cards / Glass Panels */
+  --card-bg: rgba(13, 19, 34, 0.75);
+  --card-border: rgba(255, 255, 255, 0.09);
+  --card-border-glow: rgba(99, 102, 241, 0.5);
+
+  /* Primary & Accent Glow */
+  --primary: #6366f1;
+  --primary-rgb: 99, 102, 241;
+  --primary-hover: #818cf8;
+  --primary-soft: rgba(99, 102, 241, 0.16);
+  --primary-glow: rgba(99, 102, 241, 0.38);
+  --accent: #06b6d4;
+  --accent-rgb: 6, 182, 212;
+  --accent-soft: rgba(6, 182, 212, 0.16);
+  --accent-violet: #a855f7;
+  --accent-cyan: #38bdf8;
+
+  /* Borders & Shadows */
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --shadow-soft: 0 14px 40px -10px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 35px -5px rgba(99, 102, 241, 0.32);
+  --shadow-dark: rgba(0, 0, 0, 0.45);
+
+  /* DaisyUI 5 base colors bindings */
+  --color-base-100: #080c14;
+  --color-base-200: #0d1322;
+  --color-base-300: #131b2e;
+  --color-base-content: #f8fafc;
+
+  color-scheme: dark;
+}
+
+/* =====================================================
+   BASE RESETS & TYPOGRAPHY
+===================================================== */
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
 *,
 *::before,
-*::after { box-sizing: border-box; }
+*::after {
+  box-sizing: border-box;
+}
 
-body{
+html {
+  min-height: 100%;
+  background-color: var(--bg-main) !important;
+  color: var(--text-main);
+}
+
+body {
   min-height: 100vh;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  line-height: 1.35;
   margin: 0;
-  /* background handled by your theme (daisyUI / data-theme) */
-  color: inherit;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: var(--bg-main) !important;
+  color: var(--text-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* ---- Card / panel (calc-block) ----
-   Make responsive: full-width on small screens, constrained max width on large screens.
-   Default to dark-style panels; light theme explicitly overrides below.
-*/
-.calc-block {
+/* Ambient Radial Aurora Glow Mesh - Fixed viewport backdrop that never cuts off */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99, 102, 241, 0.16), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 90% 20%, rgba(6, 182, 212, 0.12), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 10% 30%, rgba(168, 85, 247, 0.1), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Container & Layout Spacing */
+main,
+#main,
+.container,
+main.container {
+  flex: 1 0 auto;
+  max-width: 1100px;
   width: 100%;
-  max-width: 920px;
-  margin: 2.5rem auto;     /* vertical spacing */
-  padding: 1.25rem 1.5rem; /* comfortable padding */
-  border-radius: 12px;
-  border: 1px solid var(--card-border-dark);
-  background: var(--card-bg-dark);
-  color: #e6eef5;
-  box-shadow: 0 8px 30px rgba(2,6,23,0.35);
+  margin: 0 auto;
+  padding-top: 6rem !important;
+  padding-bottom: 3.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
-/* Light theme override (explicit) */
-html[data-theme="light"] .calc-block,
-.dark-mode-off .calc-block {
-  background: var(--card-bg-light);
-  color: #0f172a;
-  border: 1px solid var(--card-border-light);
-  box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+@media (max-width: 640px) {
+  main,
+  #main,
+  .container,
+  main.container {
+    padding-top: 5rem !important;
+    padding-bottom: 2rem;
+  }
 }
 
-/* Section heading */
-.calc-block > h2,
-.calc-block h1,
-.calc-block h3 {
-  margin: 0 0 .75rem 0;
-  font-weight: 600;
-  color: inherit;
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  display: none !important;
 }
 
-/* Inputs, selects and buttons match card styling */
-.input,
-.select,
-textarea {
+
+#footer {
+  margin-top: auto;
   width: 100%;
-  padding: .55rem .75rem;
-  border-radius: 8px;
-  border: 1px solid var(--card-border-dark);
-  background-color: rgba(255,255,255,0.03);
-  color: #e6eef5;
-  font-size: .95rem;
+  position: relative;
+  z-index: 10;
 }
 
-/* Light theme form controls */
-html[data-theme="light"] .input,
-html[data-theme="light"] .select,
-.dark-mode-off .input,
-.dark-mode-off .select {
-  background-color: #fff;
-  border: 1px solid var(--card-border-light);
-  color: #0f172a;
+.bg-main {
+  background-color: var(--bg-main) !important;
 }
 
-/* Make selects visibly non-transparent and add custom arrow (best-effort) */
-.select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-image:
-    linear-gradient(45deg, transparent 50%, currentColor 50%),
-    linear-gradient(135deg, currentColor 50%, transparent 50%),
-    linear-gradient(to right, rgba(0,0,0,0.02), rgba(0,0,0,0.02));
-  background-position:
-    calc(100% - 1.15rem) calc(50% - 0.45rem),
-    calc(100% - 0.85rem) calc(50% - 0.45rem),
-    calc(100% - 1.9rem) 50%;
-  background-size: 6px 6px, 6px 6px, 1px 1px;
-  background-repeat: no-repeat;
-  padding-right: 2rem;
+.text-main {
+  color: var(--text-main) !important;
 }
 
-/* Buttons: base + primary */
-.btn {
-  display: inline-flex;
+/* Override & neutralize DaisyUI's stepper .steps layout */
+.steps,
+.steps-container {
+  display: flex !important;
+  flex-direction: column !important;
+  grid-auto-flow: row !important;
+  width: 100% !important;
+  overflow-x: visible !important;
+  gap: 0.75rem;
+}
+
+/* Modern Step Table Styling */
+.step-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-secondary);
+  box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.25);
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.step-table {
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border-collapse: collapse;
+}
+
+.step-table thead tr {
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.step-table th {
+  padding: 0.65rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.step-table td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: var(--text-main);
+}
+
+.step-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.step-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.step-section-header {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary);
+  display: flex;
   align-items: center;
-  gap: .5rem;
-  padding: .5rem .75rem;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.06);
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
+  gap: 0.5rem;
+  padding: 0.5rem 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.step-notice-box {
+  padding: 0.75rem 1rem;
+  border-radius: 0.65rem;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+section {
+  margin-bottom: 3.5rem;
+}
+
+/* Headings with Modern Tracking */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+}
+
+h3 {
+  font-size: 1.15rem;
+}
+
+p,
+span,
+li {
+  color: var(--text-muted);
+}
+
+/* Ensure strong / headers have crisp high-contrast */
+strong, b {
+  color: var(--text-main);
+}
+
+/* Code & Monospace Elements */
+pre,
+code,
+kbd,
+samp,
+.font-mono,
+#steps,
+#conversionSteps,
+#bitwiseResult,
+.step-box,
+.math-output {
+  font-family: var(--font-mono) !important;
+}
+
+/* Prevent Tailwind grays from breaking dark/light theme */
+.text-gray-500,
+.text-gray-600,
+.text-gray-700 {
+  color: var(--text-muted);
+}
+
+.text-gray-900,
+.text-gray-800 {
+  color: var(--text-main);
+}
+
+/* =====================================================
+   GLASSMORPHIC CARDS & SURFACES
+===================================================== */
+
+.calc-block,
+.card,
+.content-box {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-soft);
   position: relative;
   overflow: hidden;
-  transition: transform 160ms cubic-bezier(.2,.9,.3,1), box-shadow 160ms;
-  user-select: none;
-}
-.btn:active { transform: translateY(1px) scale(.995); }
-.btn:hover { box-shadow: 0 8px 24px rgba(2,6,23,0.25); }
-
-.btn-primary {
-  background: linear-gradient(180deg, var(--primary), #0496a2);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.08);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Ripple element: created by JS (script.js) */
+.calc-block:hover,
+.card:hover,
+.content-box:hover {
+  border-color: var(--card-border-glow);
+  box-shadow: var(--shadow-soft), var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+/* Subtle Shimmer Wave on Hover */
+.calc-block::before,
+.card::before,
+.content-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.calc-block:hover::before,
+.card:hover::before,
+.content-box:hover::before {
+  left: 100%;
+}
+
+/* =====================================================
+   BUTTONS & MICRO-INTERACTIONS
+===================================================== */
+
+.btn {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 0.65rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid transparent;
+}
+
+@media (hover: hover) {
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.btn-primary,
+.btn-dark {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent-violet) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px 0 var(--primary-glow);
+}
+
+.btn-primary:hover,
+.btn-dark:hover {
+  box-shadow: 0 6px 22px 0 var(--primary-glow);
+  filter: brightness(1.08);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--card-border);
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.initial-color,
+.btn.text-black {
+  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--text-main);
+}
+
+.initial-color:hover,
+.btn.text-black:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* Ripple effect */
 .ripple {
   position: absolute;
   border-radius: 9999px;
-  background: rgba(6,182,212,0.18);
+  background: rgba(99, 102, 241, 0.25);
   transform: scale(0);
   opacity: 1;
   pointer-events: none;
   will-change: transform, opacity;
-  animation: rippleAnim 520ms cubic-bezier(.2,.9,.3,1);
+  animation: rippleAnim 500ms cubic-bezier(.2, .9, .3, 1);
 }
+
 @keyframes rippleAnim {
-  to { transform: scale(1); opacity: 0; }
-}
-
-/* Result pulse animation for feedback */
-.result-pulse {
-  animation: resultPulse 420ms cubic-bezier(.2,.9,.3,1);
-  transform-origin: center;
-}
-@keyframes resultPulse {
-  0% { transform: scale(.98); opacity: 0.85; }
-  60% { transform: scale(1.02); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* Steps styling (subtle, matches arithmetic) */
-.steps p {
-  margin: 6px 0;
-  padding-left: 8px;
-  border-left: 2px solid rgba(0,0,0,0.04);
-  color: var(--muted);
-}
-
-/* Small layout helpers */
-#convertClearBtn {
-  display: inline-flex;
-  gap: .75rem;
-  align-items: center;
-}
-
-/* Narrow form rows on small screens, side-by-side on larger */
-@media (min-width: 640px) {
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+  to {
+    transform: scale(1);
+    opacity: 0;
   }
 }
 
-/* Focus-visible for keyboard users */
-:focus { outline: none; }
-:focus-visible {
-  outline: 3px solid rgba(6,182,212,0.18);
-  outline-offset: 3px;
-  border-radius: 6px;
+/* =====================================================
+   FORM INPUT CONTROLS (THEME-SAFE)
+===================================================== */
+
+input,
+textarea,
+select {
+  font-family: var(--font-sans);
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-/* Make sure calc-block headings and spacing look neat */
-.calc-block > h2 { font-size: 1.125rem; margin-bottom: .75rem; }
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+  outline: none;
+  background: var(--card-bg);
+}
 
-/* Respect reduced motion preferences */
+select option {
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* Input placeholder colors */
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+/* =====================================================
+   NAVBAR (STICKY GLASSMORPHIC HEADER)
+===================================================== */
+
+#navbar {
+  top: 0;
+  position: sticky !important;
+  z-index: 9999;
+  width: 100%;
+  background-color: var(--bg-main) !important;
+  background: color-mix(in srgb, var(--bg-main) 88%, transparent) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid var(--border-soft) !important;
+  box-shadow: 0 4px 20px -2px var(--shadow-dark) !important;
+  color: var(--text-main) !important;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+#navbar nav.navbar,
+nav.navbar,
+.navbar {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--text-main) !important;
+  border: none !important;
+}
+
+.brand-text {
+  color: var(--text-main) !important;
+  font-weight: 800;
+}
+
+#navbar #mobile-menu {
+  z-index: 99999;
+}
+
+.menu a,
+#navbar .menu a,
+#features-button {
+  color: var(--text-muted) !important;
+  font-weight: 500 !important;
+  border-radius: 8px;
+  transition: all 0.15s ease !important;
+}
+
+.menu a:hover,
+#navbar .menu a:hover,
+#features-button:hover {
+  color: var(--text-main) !important;
+  background: var(--primary-soft) !important;
+}
+
+/* Nav Active Page Indicator */
+.nav-active,
+#navbar .nav-active,
+.menu a.nav-active {
+  background: var(--primary-soft) !important;
+  color: var(--primary) !important;
+  font-weight: 700 !important;
+  border: 1px solid var(--primary-glow) !important;
+}
+
+.navbar-start a {
+  font-size: clamp(16px, 4vw, 22px);
+}
+
+/* =====================================================
+   PILL BADGES & CHIPS
+===================================================== */
+
+.badge-glow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border: 1px solid var(--primary-glow);
+  box-shadow: 0 0 12px -2px var(--primary-glow);
+}
+
+.badge-cyan {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  box-shadow: 0 0 12px -2px rgba(6, 182, 212, 0.25);
+}
+
+.badge-violet {
+  background: rgba(168, 85, 247, 0.15);
+  color: var(--accent-violet);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+}
+
+/* =====================================================
+   EXECUTION STEPS & CODE BLOCKS
+===================================================== */
+
+.step-box,
+#steps,
+#conversionSteps {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  line-height: 1.75;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  padding: 1.25rem;
+  color: var(--text-main);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* =====================================================
+   FOOTER STYLING
+===================================================== */
+
+footer {
+  background-color: var(--bg-secondary);
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-soft);
+  padding: 2.5rem 1.5rem;
+  margin-top: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+footer a {
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: var(--primary);
+}
+
+footer h6 {
+  color: var(--text-main);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  .ripple, .result-pulse { animation: none !important; transition: none !important; }
+  .calc-block,
+  .card,
+  .content-box,
+  .btn {
+    transition: none !important;
+    transform: none !important;
+  }
 }

@@ -1,4 +1,8 @@
 function decimalToBase(decimal, toBase) {
+    let fnBinary = typeof decimalToBinary !== "undefined" ? decimalToBinary : (typeof require !== "undefined" ? require("./decimalToBinary.js").decimalToBinary : null);
+    let fnOctal = typeof decimalToOctal !== "undefined" ? decimalToOctal : (typeof require !== "undefined" ? require("./decimalToOctal.js").decimalToOctal : null);
+    let fnHex = typeof decimalToHexadecimal !== "undefined" ? decimalToHexadecimal : (typeof require !== "undefined" ? require("./decimalToHexadecimal.js").decimalToHexadecimal : null);
+
     switch (toBase) {
         case "decimal":
             return {
@@ -7,15 +11,19 @@ function decimalToBase(decimal, toBase) {
             };
 
         case "binary":
-            return decimalToBinary(decimal);
+            return fnBinary ? fnBinary(decimal) : { result: "", steps: [] };
 
         case "octal":
-            return decimalToOctal(decimal);
+            return fnOctal ? fnOctal(decimal) : { result: "", steps: [] };
 
         case "hexadecimal":
-            return decimalToHexadecimal(decimal);
+            return fnHex ? fnHex(decimal) : { result: "", steps: [] };
 
         default:
             throw new Error("Unsupported base");
     }
+}
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = { decimalToBase };
 }

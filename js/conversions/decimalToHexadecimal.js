@@ -1,6 +1,7 @@
 function decimalToHexadecimal(decimal) {
     let steps = [];
-    let number = decimal;
+    let isNegative = decimal < 0;
+    let number = Math.abs(decimal);
     let hex = "";
     const hexMap = "0123456789ABCDEF";
 
@@ -25,10 +26,19 @@ function decimalToHexadecimal(decimal) {
         number = Math.floor(number / 16);
     }
 
+    if (isNegative) {
+        hex = "-" + hex;
+        steps.push(`Apply negative sign: -${hex.substring(1)}`);
+    }
+
     steps.push(`Final Hexadecimal Value = ${hex}`);
 
     return {
         result: hex,
         steps: steps
     };
+}
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = { decimalToHexadecimal };
 }

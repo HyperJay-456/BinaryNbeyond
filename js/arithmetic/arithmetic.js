@@ -1,29 +1,41 @@
+// js/arithmetic/arithmetic.js
+
 function performArithmetic() {
-    const system = document.getElementById("numberSystem").value;
-    const num1 = document.getElementById("num1").value.trim();
-    const num2 = document.getElementById("num2").value.trim();
-    const operation = document.getElementById("operation").value;
+    const systemEl = document.getElementById("numberSystem");
+    const num1El = document.getElementById("num1");
+    const num2El = document.getElementById("num2");
+    const opEl = document.getElementById("operation");
 
     const resultDiv = document.getElementById("arithResult");
     const stepsDiv = document.getElementById("arithSteps");
     const errorDiv = document.getElementById("arithError");
 
-    resultDiv.innerText = "";
-    stepsDiv.innerHTML = "";
-    errorDiv.innerText = "";
+    if (resultDiv) resultDiv.innerText = "";
+    if (stepsDiv) stepsDiv.innerHTML = "";
+    if (errorDiv) errorDiv.innerText = "";
+
+    if (!num1El || !num2El || !systemEl || !opEl) return;
+
+    const system = systemEl.value;
+    const num1 = num1El.value.trim();
+    const num2 = num2El.value.trim();
+    const operation = opEl.value;
 
     if (num1 === "" || num2 === "") {
-        errorDiv.innerText = "Please enter both numbers.";
+        if (errorDiv) errorDiv.innerText = "Please enter both numbers.";
         return;
     }
 
-    if (!validateInput(num1, system) || !validateInput(num2, system)) {
-        errorDiv.innerText = `Invalid ${system} number entered.`;
-        return;
+    if (typeof validateInput === "function") {
+        if (!validateInput(num1, system) || !validateInput(num2, system)) {
+            if (errorDiv) errorDiv.innerText = `Invalid ${system} number entered.`;
+            return;
+        }
     }
 
     try {
-        let result, steps = [];
+        let result;
+        const steps = [];
 
         if (system === "decimal") {
             result = decimalArithmetic(num1, num2, operation, steps);
@@ -31,88 +43,288 @@ function performArithmetic() {
             result = binaryArithmetic(num1, num2, operation, steps);
         }
 
-        resultDiv.innerText = result;
-        animateSteps(steps, "arithSteps", 600);
+        if (resultDiv) resultDiv.innerText = result;
+        if (typeof animateSteps === "function") {
+            animateSteps(steps, "arithSteps", 500);
+        } else if (stepsDiv) {
+            stepsDiv.innerHTML = steps.map(s => `<p>${s}</p>`).join("");
+        }
 
     } catch (err) {
-        errorDiv.innerText = "Error during calculation.";
+        const errMsg = String(err?.message || err);
+        if (errorDiv) {
+            if (errMsg.includes("❌")) {
+                errorDiv.innerText = errMsg;
+            } else {
+                errorDiv.innerText = "Error during calculation: " + errMsg;
+            }
+        }
         console.error(err);
     }
 }
 
+function decimalArithmetic(a, b, op, steps = []) {
+    const isFloat = String(a).includes(".") || String(b).includes(".");
+    const numA = isFloat ? parseFloat(a) : parseInt(a, 10);
+    const numB = isFloat ? parseFloat(b) : parseInt(b, 10);
 
-function decimalArithmetic(a, b, op, steps) {
-    a = parseInt(a);
-    b = parseInt(b);
+    if (Number.isNaN(numA) || Number.isNaN(numB)) {
+        throw new Error("Invalid decimal numbers provided.");
+    }
 
-    steps.push(`Given numbers: ${a} and ${b}`);
+    steps.push(`Given decimal numbers: ${numA} and ${numB}`);
 
     switch (op) {
-        case "add":
-            steps.push(`${a} + ${b} = ${a + b}`);
-            return a + b;
+        case "add": {
+            const sum = isFloat ? +(numA + numB).toFixed(6) : numA + numB;
+            steps.push(`${numA} + ${numB} = ${sum}`);
+            return String(sum);
+        }
 
-        case "sub":
-            steps.push(`${a} - ${b} = ${a - b}`);
-            return a - b;
+        case "sub": {
+            const diff = isFloat ? +(numA - numB).toFixed(6) : numA - numB;
+            steps.push(`${numA} − ${numB} = ${diff}`);
+            return String(diff);
+        }
 
-        case "mul":
-            steps.push(`${a} × ${b} = ${a * b}`);
-            return a * b;
+        case "mul": {
+            const product = isFloat ? +(numA * numB).toFixed(6) : numA * numB;
+            steps.push(`${numA} × ${numB} = ${product}`);
+            return String(product);
+        }
 
-        case "div":
-            if (b === 0) throw "Division by zero";
-            steps.push(`${a} ÷ ${b} = ${Math.floor(a / b)} (Quotient)`);
-            return Math.floor(a / b);
+        case "div": {
+            if (numB === 0) {
+                throw new Error("❌ Cannot divide by zero. Please enter a non-zero divisor.");
+            }
+
+            if (isFloat) {
+                const quotient = +(numA / numB).toFixed(6);
+                steps.push(`${numA} ÷ ${numB} = ${quotient}`);
+                return String(quotient);
+            }
+
+            const quotient = Math.trunc(numA / numB);
+            const remainder = numA % numB;
+            steps.push(`${numA} ÷ ${numB}:`);
+            steps.push(`Quotient = ${quotient}`);
+            if (remainder !== 0) {
+                steps.push(`Remainder = ${remainder}`);
+                return `${quotient} R ${remainder}`;
+            }
+            return String(quotient);
+        }
+
+        default:
+            throw new Error(`Unknown operation: ${op}`);
     }
 }
 
-function binaryArithmetic(a, b, op, steps) {
+function binarySubtractionWithTwosComplement(a, b, steps = []) {
+    let cleanA = String(a).trim().replace(/^0+(?!$)/, "") || "0";
+    let cleanB = String(b).trim().replace(/^0+(?!$)/, "") || "0";
+
+    steps.push(`Binary Subtraction using 2’s Complement: (${cleanA})₂ − (${cleanB})₂`);
+
+    if (cleanA === cleanB) {
+        steps.push(`Both numbers are equal: (${cleanA})₂ − (${cleanB})₂ = 0`);
+        return "0";
+    }
+
+    const n = Math.max(cleanA.length, cleanB.length) + 1;
+    const aPadded = cleanA.padStart(n, "0");
+    const bPadded = cleanB.padStart(n, "0");
+
+    steps.push(`Step 1: Pad both numbers to ${n} bits with leading sign bits`);
+    steps.push(`A = ${aPadded}`);
+    steps.push(`B = ${bPadded}`);
+
+    const onesCompB = bPadded
+        .split("")
+        .map(bit => (bit === "0" ? "1" : "0"))
+        .join("");
+    steps.push(`Step 2: 1's Complement of B (invert bits): ${onesCompB}`);
+
+    const addOneResult = (typeof binaryAddition === "function")
+        ? binaryAddition(onesCompB, "1")
+        : defaultBinaryAddition(onesCompB, "1");
+
+    let twosCompB = addOneResult.result;
+    if (twosCompB.length > n) {
+        twosCompB = twosCompB.slice(-n);
+    } else {
+        twosCompB = twosCompB.padStart(n, "0");
+    }
+    steps.push(`Step 3: 2's Complement of B (add 1 to 1's complement): ${twosCompB}`);
+
+    steps.push(`Step 4: Add A (${aPadded}) + 2's Complement of B (${twosCompB})`);
+    const sumResult = (typeof binaryAddition === "function")
+        ? binaryAddition(aPadded, twosCompB)
+        : defaultBinaryAddition(aPadded, twosCompB);
+
+    steps.push(...sumResult.steps);
+    const sum = sumResult.result;
+
+    if (sum.length > n) {
+        const endCarry = sum[0];
+        const rawMagnitude = sum.slice(1);
+        const finalResult = rawMagnitude.replace(/^0+(?!$)/, "") || "0";
+        steps.push(`Step 5: End carry = ${endCarry} (Carry of 1 indicates positive result).`);
+        steps.push(`Discard end carry: ${sum} → ${rawMagnitude}`);
+        steps.push(`Final Binary Result = ${finalResult} (Decimal: ${parseInt(finalResult, 2)})`);
+        return finalResult;
+    } else {
+        steps.push(`Step 5: No end carry generated (indicates result is NEGATIVE in 2's complement form).`);
+        const sumPadded = sum.padStart(n, "0");
+        const onesCompSum = sumPadded
+            .split("")
+            .map(bit => (bit === "0" ? "1" : "0"))
+            .join("");
+
+        const magResult = (typeof binaryAddition === "function")
+            ? binaryAddition(onesCompSum, "1")
+            : defaultBinaryAddition(onesCompSum, "1");
+
+        let magnitude = magResult.result;
+        if (magnitude.length > n) magnitude = magnitude.slice(-n);
+        magnitude = magnitude.replace(/^0+(?!$)/, "") || "0";
+
+        const finalResult = "-" + magnitude;
+        steps.push(`Magnitude = 2's complement of ${sumPadded} = ${magnitude}`);
+        steps.push(`Final Binary Result = ${finalResult} (Decimal: -${parseInt(magnitude, 2)})`);
+        return finalResult;
+    }
+}
+
+function binaryArithmetic(a, b, op, steps = []) {
+    let rawA = String(a).trim();
+    let rawB = String(b).trim();
+
+    const isNegA = rawA.startsWith("-");
+    const isNegB = rawB.startsWith("-");
+
+    const cleanA = isNegA ? rawA.substring(1) : rawA;
+    const cleanB = isNegB ? rawB.substring(1) : rawB;
+
+    const decA = (isNegA ? -1 : 1) * parseInt(cleanA, 2);
+    const decB = (isNegB ? -1 : 1) * parseInt(cleanB, 2);
+
+    steps.push(`Inputs in Binary: A = ${rawA} (${decA}₁₀), B = ${rawB} (${decB}₁₀)`);
 
     switch (op) {
-        case "add":
-            const add = binaryAddition(a, b);
-            steps.push(...add.steps);
-            return add.result;
+        case "add": {
+            if (!isNegA && !isNegB) {
+                const add = (typeof binaryAddition === "function")
+                    ? binaryAddition(cleanA, cleanB)
+                    : defaultBinaryAddition(cleanA, cleanB);
+                steps.push(...add.steps);
+                return add.result;
+            } else if (isNegA && !isNegB) {
+                return binarySubtractionWithTwosComplement(cleanB, cleanA, steps);
+            } else if (!isNegA && isNegB) {
+                return binarySubtractionWithTwosComplement(cleanA, cleanB, steps);
+            } else {
+                const add = (typeof binaryAddition === "function")
+                    ? binaryAddition(cleanA, cleanB)
+                    : defaultBinaryAddition(cleanA, cleanB);
+                steps.push(...add.steps);
+                const res = "-" + add.result;
+                steps.push(`Both numbers are negative: Final Result = ${res}`);
+                return res;
+            }
+        }
 
-        case "sub":
-            steps.push("Binary subtraction using 2’s complement");
+        case "sub": {
+            if (!isNegA && !isNegB) {
+                return binarySubtractionWithTwosComplement(cleanA, cleanB, steps);
+            } else if (!isNegA && isNegB) {
+                steps.push(`Subtracting negative is equivalent to addition: (${cleanA})₂ + (${cleanB})₂`);
+                const add = (typeof binaryAddition === "function")
+                    ? binaryAddition(cleanA, cleanB)
+                    : defaultBinaryAddition(cleanA, cleanB);
+                steps.push(...add.steps);
+                return add.result;
+            } else if (isNegA && !isNegB) {
+                steps.push(`Both terms are negative: −((${cleanA})₂ + (${cleanB})₂)`);
+                const add = (typeof binaryAddition === "function")
+                    ? binaryAddition(cleanA, cleanB)
+                    : defaultBinaryAddition(cleanA, cleanB);
+                steps.push(...add.steps);
+                return "-" + add.result;
+            } else {
+                steps.push(`−A − (−B) is equivalent to: (${cleanB})₂ − (${cleanA})₂`);
+                return binarySubtractionWithTwosComplement(cleanB, cleanA, steps);
+            }
+        }
 
-            const comp = twosComplement(b);
-            steps.push(...comp.steps);
+        case "mul": {
+            const productDec = decA * decB;
+            const sign = productDec < 0 ? "-" : "";
+            const absProduct = Math.abs(productDec);
+            const productBin = sign + absProduct.toString(2);
 
-            const sub = binaryAddition(a, comp.result);
-            steps.push(...sub.steps);
+            steps.push(`Convert ${rawA}₂ to decimal → ${decA}`);
+            steps.push(`Convert ${rawB}₂ to decimal → ${decB}`);
+            steps.push(`Multiply in decimal: ${decA} × ${decB} = ${productDec}`);
+            steps.push(`Convert ${productDec} to binary → ${productBin}₂`);
 
-            return sub.result;
+            return productBin;
+        }
 
-        case "mul":
-            let decA = parseInt(a, 2);
-            let decB = parseInt(b, 2);
-            let product = decA * decB;
+        case "div": {
+            if (decB === 0) {
+                throw new Error("❌ Cannot divide by zero. Please enter a non-zero divisor.");
+            }
 
-            steps.push(`Convert ${a} to decimal → ${decA}`);
-            steps.push(`Convert ${b} to decimal → ${decB}`);
-            steps.push(`Multiply: ${decA} × ${decB} = ${product}`);
-            steps.push(`Convert ${product} to binary`);
+            const quotientDec = Math.trunc(decA / decB);
+            const remainderDec = Math.abs(decA % decB);
 
-            return product.toString(2);
+            const sign = quotientDec < 0 ? "-" : "";
+            const quotientBin = (quotientDec === 0 && sign ? "-" : "") + Math.abs(quotientDec).toString(2);
+            const remainderBin = remainderDec.toString(2);
 
-        case "div":
-            let dividend = parseInt(a, 2);
-            let divisor = parseInt(b, 2);
+            steps.push(`Convert ${rawA}₂ to decimal → ${decA}`);
+            steps.push(`Convert ${rawB}₂ to decimal → ${decB}`);
+            steps.push(`Divide in decimal: ${decA} ÷ ${decB} = ${quotientDec}, Remainder = ${remainderDec}`);
+            steps.push(`Convert quotient to binary: ${quotientDec} → ${quotientBin}₂`);
 
-            if (divisor === 0) throw "Division by zero";
+            if (remainderDec !== 0) {
+                steps.push(`Convert remainder to binary: ${remainderDec} → ${remainderBin}₂`);
+                const fullResult = `${quotientBin} R ${remainderBin}`;
+                steps.push(`Final Result = ${fullResult}`);
+                return fullResult;
+            }
 
-            let quotient = Math.floor(dividend / divisor);
+            steps.push(`Final Result = ${quotientBin}`);
+            return quotientBin;
+        }
 
-            steps.push(`Convert ${a} → ${dividend}`);
-            steps.push(`Convert ${b} → ${divisor}`);
-            steps.push(`Divide: ${dividend} ÷ ${divisor} = ${quotient}`);
-            steps.push(`Convert ${quotient} to binary`);
-
-            return quotient.toString(2);
+        default:
+            throw new Error(`Unknown operation: ${op}`);
     }
+}
+
+function defaultBinaryAddition(bin1, bin2) {
+    let s1 = String(bin1).trim().replace(/[^01]/g, "") || "0";
+    let s2 = String(bin2).trim().replace(/[^01]/g, "") || "0";
+    const maxLen = Math.max(s1.length, s2.length);
+    s1 = s1.padStart(maxLen, "0");
+    s2 = s2.padStart(maxLen, "0");
+
+    let carry = 0;
+    let result = "";
+    const steps = [`Align: ${s1} + ${s2}`];
+
+    for (let i = maxLen - 1; i >= 0; i--) {
+        const b1 = parseInt(s1[i], 10);
+        const b2 = parseInt(s2[i], 10);
+        const sum = b1 + b2 + carry;
+        result = (sum % 2) + result;
+        carry = Math.floor(sum / 2);
+    }
+
+    if (carry) result = carry + result;
+    return { result, steps };
 }
 
 let currentArithmeticQuestion = null;
@@ -121,20 +333,13 @@ function generateArithmeticPractice() {
     const systems = ["decimal", "binary"];
     const operations = ["add", "sub", "mul", "div"];
 
-    const system =
-        systems[Math.floor(Math.random() * systems.length)];
+    const system = systems[Math.floor(Math.random() * systems.length)];
+    const operation = operations[Math.floor(Math.random() * operations.length)];
 
-    const operation =
-        operations[Math.floor(Math.random() * operations.length)];
+    const diffEl = document.getElementById("arithDifficulty");
+    const difficulty = diffEl ? diffEl.value : "easy";
 
-    const difficulty =
-        document.getElementById("arithDifficulty").value;
-
-    const num1 =
-        generateArithmeticNumber(system, difficulty, operation);
-
-    const num2 =
-        generateArithmeticNumber(system, difficulty, operation);
+    const { num1, num2 } = generateArithmeticQuestionPair(system, difficulty, operation);
 
     currentArithmeticQuestion = {
         system,
@@ -151,74 +356,77 @@ function generateArithmeticPractice() {
         div: "÷"
     };
 
-    document.getElementById("arithPracticeQuestion").innerText =
-        `[${difficulty.toUpperCase()}] (${num1}) ${opSymbol[operation]} (${num2}) in ${system.toUpperCase()}`;
+    const qEl = document.getElementById("arithPracticeQuestion");
+    if (qEl) {
+        qEl.innerText = `[${difficulty.toUpperCase()}] (${num1}) ${opSymbol[operation]} (${num2}) in ${system.toUpperCase()}`;
+    }
 
-    document.getElementById("arithPracticeAnswer").value = "";
-    document.getElementById("arithPracticeResult").innerText = "";
-    document.getElementById("arithPracticeSteps").innerHTML = "";
+    const ansEl = document.getElementById("arithPracticeAnswer");
+    const resEl = document.getElementById("arithPracticeResult");
+    const stepsEl = document.getElementById("arithPracticeSteps");
+
+    if (ansEl) ansEl.value = "";
+    if (resEl) resEl.innerText = "";
+    if (stepsEl) stepsEl.innerHTML = "";
 }
 
+function generateArithmeticQuestionPair(system, difficulty, operation) {
+    let min = 1, max = 10;
+    if (difficulty === "medium") { min = 10; max = 50; }
+    if (difficulty === "hard") { min = 50; max = 200; }
 
-function generateArithmeticNumber(system, difficulty, operation = null) {
+    if (operation === "div") {
+        const divisor = Math.floor(Math.random() * (max / 4 || 3)) + 2;
+        const quotient = Math.floor(Math.random() * (max / 3 || 3)) + 1;
+        const dividend = divisor * quotient;
 
-    let min, max;
+        if (system === "decimal") {
+            return { num1: String(dividend), num2: String(divisor) };
+        } else {
+            return { num1: dividend.toString(2), num2: divisor.toString(2) };
+        }
+    }
 
-    if (difficulty === "easy") {
-        min = 1; max = 10;
-    } else if (difficulty === "medium") {
-        min = 10; max = 50;
-    } else {
-        min = 50; max = 200;
+    let n1 = Math.floor(Math.random() * (max - min)) + min;
+    let n2 = Math.floor(Math.random() * (max - min)) + min;
+
+    if (operation === "sub" && n2 > n1) {
+        [n1, n2] = [n2, n1];
     }
 
     if (system === "decimal") {
-        if (operation === "div") {
-            return Math.floor(Math.random() * (max - min)) + min || 1;
-        }
-        return Math.floor(Math.random() * (max - min)) + min;
+        return { num1: String(n1), num2: String(n2) };
+    } else {
+        return { num1: n1.toString(2), num2: n2.toString(2) };
     }
-
-    // binary
-    let number =
-        Math.floor(Math.random() * (max - min)) + min;
-
-    return number.toString(2);
 }
-
 
 function checkArithmeticPractice() {
     if (!currentArithmeticQuestion) return;
 
-    const answer =
-        document.getElementById("arithPracticeAnswer").value.trim();
+    const ansEl = document.getElementById("arithPracticeAnswer");
+    const resEl = document.getElementById("arithPracticeResult");
+    if (!ansEl || !resEl) return;
 
+    const answer = ansEl.value.trim();
     if (answer === "") {
-        document.getElementById("arithPracticeResult").innerText =
-            "Please enter an answer.";
+        resEl.innerText = "Please enter an answer.";
         return;
     }
 
     const { system, operation, num1, num2 } = currentArithmeticQuestion;
-
     let correct;
 
     if (system === "decimal") {
-        correct = decimalArithmetic(
-            num1.toString(),
-            num2.toString(),
-            operation,
-            []
-        ).toString();
+        correct = decimalArithmetic(num1, num2, operation, []).trim();
     } else {
-        correct = binaryArithmetic(num1, num2, operation, []).toString();
+        correct = binaryArithmetic(num1, num2, operation, []).trim();
     }
 
-    if (answer === correct) {
-        document.getElementById("arithPracticeResult").innerText = "✅ Correct!";
+    if (answer.toUpperCase() === correct.toUpperCase()) {
+        resEl.innerText = "✅ Correct!";
     } else {
-        document.getElementById("arithPracticeResult").innerText =
-            `❌ Incorrect. Correct Answer: ${correct}`;
+        resEl.innerText = `❌ Incorrect. Correct Answer: ${correct}`;
     }
 }
 
@@ -228,18 +436,25 @@ function showArithmeticPracticeSteps() {
     const { system, operation, num1, num2 } = currentArithmeticQuestion;
     const steps = [];
 
-    let result;
-
     if (system === "decimal") {
-        result = decimalArithmetic(
-            num1.toString(),
-            num2.toString(),
-            operation,
-            steps
-        );
+        decimalArithmetic(num1, num2, operation, steps);
     } else {
-        result = binaryArithmetic(num1, num2, operation, steps);
+        binaryArithmetic(num1, num2, operation, steps);
     }
 
-    animateSteps(steps, "arithPracticeSteps", 600);
+    if (typeof animateSteps === "function") {
+        animateSteps(steps, "arithPracticeSteps", 500);
+    } else {
+        const s = document.getElementById("arithPracticeSteps");
+        if (s) s.innerHTML = steps.map(p => `<p>${p}</p>`).join("");
+    }
+}
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+        decimalArithmetic,
+        binaryArithmetic,
+        binarySubtractionWithTwosComplement,
+        generateArithmeticQuestionPair
+    };
 }

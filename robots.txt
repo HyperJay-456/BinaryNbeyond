@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Allow access to static resources
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# Block unnecessary system files (if any)
+Disallow: /node_modules/
+Disallow: /.git/
+
+# Sitemap
+Sitemap: https://binarynbeyond.com/sitemap.xml

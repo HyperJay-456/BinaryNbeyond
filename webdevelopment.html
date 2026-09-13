@@ -2,134 +2,159 @@
 <html lang="en">
 
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2NKRTM6JXC"></script>
-    <script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2NKRTM6JXC"></script>
+  <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-2NKRTM6JXC');
-    </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BinaryNbeyond - Web Development</title>
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BinaryNBeyond — Web Development & Engineering Services</title>
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme') || 'synthwave';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      if (savedTheme === 'synthwave') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- Shared UI + Page Styles -->
+  <link rel="icon" type="image/x-icon" href="logo.webp">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/index.css" />
 
-    <!-- shared UI + page styles -->
-    <link rel="icon" type="image/x-icon" href="logo.webp">
-    <link rel="stylesheet" href="css/common.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/index.css" />
+  <!-- Meta Tags -->
+  <meta name="title" content="Web Development Services | BinaryNBeyond">
+  <meta name="description" content="BinaryNBeyond offers modern web development services including responsive design, accessible UI, and industry-grade engineering using modern web standards.">
+  <meta name="keywords" content="web development services, responsive website design, modern web standards, HTML5 CSS3 JavaScript Tailwind, portfolio website, student web developers">
+  <meta name="author" content="BinaryNBeyond Team">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://binarynbeyond.com/webdevelopment.html">
 
-    <!-- Meta -->
-    <!-- Meta Tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="Web Development Services | Binary & Beyond">
-    <meta name="description" content="BinaryNbeyond offers professional web development services including responsive design, modern UI, and industry-level websites using HTML, CSS, JavaScript, and Bootstrap.">
-    <meta name="keywords" content="web development services, responsive website design, industry level website, HTML CSS JavaScript, Bootstrap website, FSD mini project, student web developers">
-    <meta name="author" content="BinaryNbeyond Team">
-    <meta name="robots" content="index, follow">
-    <!-- Open Graph Meta (Optional) -->
-    <meta property="og:title" content="Web Development Services | BinaryNbeyond">
-    <meta property="og:description" content="Get responsive and industry-ready websites developed using modern web technologies by the BinaryNbeyond team.">
-    <meta property="og:type" content="website">
+  <!-- Open Graph Meta -->
+  <meta property="og:title" content="Web Development Services | BinaryNBeyond">
+  <meta property="og:description" content="Get responsive and industry-ready websites developed using modern web technologies by the BinaryNBeyond team.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://binarynbeyond.com/webdevelopment.html">
 </head>
 
-<body>
+<body class="bg-main text-main">
+  <!-- Navbar -->
+  <div id="navbar"></div>
 
-    <!-- Navbar -->
-    <div id="navbar"></div>
-    <!-- Main Content -->
-    <main class="container">
+  <!-- Main Content -->
+  <main class="container pt-24 pb-12">
+    <header class="text-center max-w-3xl mx-auto mb-12">
+      <div class="badge-glow mb-4">Engineering Services</div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+        Modern Web Development & <span class="bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-400 bg-clip-text text-transparent">Digital Craftsmanship</span>
+      </h1>
+      <p class="text-base sm:text-lg text-muted leading-relaxed">
+        At <strong>BinaryNBeyond</strong>, our engineering team designs and delivers high-performance, responsive, and visually stunning web applications for startups, students, and businesses.
+      </p>
+    </header>
 
-        <section class="content-box">
-            <h1>Our Web Development Services</h1>
-            <p>
-                At <strong>Binary & Beyond</strong>, we also offer professional web development services
-                to individuals, startups, and small businesses who want a modern, responsive, and
-                industry-ready website.
-            </p>
-            <p>
-                Our goal is to create websites that are not only visually appealing but also functional,
-                user-friendly, and optimized for different devices.
-            </p>
-        </section>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      <section class="card p-6 sm:p-8 rounded-2xl shadow-xl">
+        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+          <span>What We Build</span>
+        </h2>
+        <ul class="space-y-3 text-sm text-muted">
+          <li class="flex items-start gap-2.5">
+            <span class="text-indigo-400 font-bold">&check;</span>
+            <span><strong>Educational & Computing Tools:</strong> Interactive calculators, visual learning engines, and data visualizers.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-indigo-400 font-bold">&check;</span>
+            <span><strong>High-Converting Landing Pages:</strong> Ultra-fast, SEO-optimized presentation sites for startups and products.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-indigo-400 font-bold">&check;</span>
+            <span><strong>Developer Portfolios:</strong> Modern glassmorphic personal brands showcasing engineering depth.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-indigo-400 font-bold">&check;</span>
+            <span><strong>Academic & Capstone Projects:</strong> Production-quality full-stack web applications for college evaluations.</span>
+          </li>
+        </ul>
+      </section>
 
-        <section class="content-box">
-            <h2>What We Can Build</h2>
-            <ul>
-                <li>Responsive static websites</li>
-                <li>Educational and informational websites</li>
-                <li>Portfolio websites</li>
-                <li>Landing pages for businesses or startups</li>
-                <li>College mini-project and academic websites</li>
-            </ul>
-        </section>
+      <section class="card p-6 sm:p-8 rounded-2xl shadow-xl">
+        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+          <span>Core Technology Stack</span>
+        </h2>
+        <ul class="space-y-3 text-sm text-muted">
+          <li class="flex items-start gap-2.5">
+            <span class="text-cyan-400 font-bold">&check;</span>
+            <span><strong>Modern Frontend:</strong> Semantic HTML5, Vanilla CSS3 / Tailwind v4, and modern ES6+ JavaScript.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-cyan-400 font-bold">&check;</span>
+            <span><strong>Design Systems:</strong> Custom glassmorphic tokens, DaisyUI component integration, and theme controllers.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-cyan-400 font-bold">&check;</span>
+            <span><strong>Performance & CWV:</strong> Zero-bloat architectures optimized for Core Web Vitals and lightning-fast LCP.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-cyan-400 font-bold">&check;</span>
+            <span><strong>Accessibility:</strong> WCAG contrast compliance, responsive mobile design, and keyboard navigation.</span>
+          </li>
+        </ul>
+      </section>
+    </div>
 
-        <section class="content-box">
-            <h2>Technologies We Use</h2>
-            <p>
-                We use modern and widely accepted web technologies to ensure quality and scalability.
-            </p>
-            <ul>
-                <li>HTML5 for structured content</li>
-                <li>CSS3 for styling and layouts</li>
-                <li>JavaScript for interactivity</li>
-                <li>Bootstrap for responsive and mobile-first design</li>
-            </ul>
-        </section>
+    <!-- Workflow Process -->
+    <section class="card p-6 sm:p-8 rounded-2xl shadow-xl mb-12">
+      <h2 class="text-2xl font-bold tracking-tight mb-6 text-center">Our Development Process</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="space-y-2 border-l-2 border-indigo-500/40 pl-4">
+          <div class="font-mono text-xs font-bold text-indigo-400">PHASE 01</div>
+          <h3 class="text-base font-bold">Discovery & Scope</h3>
+          <p class="text-xs text-muted leading-relaxed">Aligning on core user requirements, user flows, and technical goals.</p>
+        </div>
+        <div class="space-y-2 border-l-2 border-cyan-500/40 pl-4">
+          <div class="font-mono text-xs font-bold text-cyan-400">PHASE 02</div>
+          <h3 class="text-base font-bold">UI/UX Architecture</h3>
+          <p class="text-xs text-muted leading-relaxed">Designing modern glassmorphic layouts, typography, and color tokens.</p>
+        </div>
+        <div class="space-y-2 border-l-2 border-purple-500/40 pl-4">
+          <div class="font-mono text-xs font-bold text-purple-400">PHASE 03</div>
+          <h3 class="text-base font-bold">Clean Implementation</h3>
+          <p class="text-xs text-muted leading-relaxed">Developing lightweight, responsive components backed by unit tests.</p>
+        </div>
+        <div class="space-y-2 border-l-2 border-amber-500/40 pl-4">
+          <div class="font-mono text-xs font-bold text-amber-400">PHASE 04</div>
+          <h3 class="text-base font-bold">Launch & Polish</h3>
+          <p class="text-xs text-muted leading-relaxed">Cross-browser verification, mobile tuning, and seamless deployment.</p>
+        </div>
+      </div>
+    </section>
 
-        <section class="content-box">
-            <h2>Why Choose Us</h2>
-            <ul>
-                <li>Clean and modern UI design</li>
-                <li>Fully responsive layouts for all devices</li>
-                <li>Industry-standard coding practices</li>
-                <li>Attention to performance and usability</li>
-                <li>Customized solutions based on client requirements</li>
-            </ul>
-        </section>
+    <!-- Contact Banner -->
+    <section class="card p-8 rounded-2xl text-center bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10 border border-white/15">
+      <h2 class="text-2xl sm:text-3xl font-extrabold mb-3">Have a project in mind?</h2>
+      <p class="text-sm sm:text-base text-muted max-w-xl mx-auto mb-6">
+        Whether you are building a student capstone, startup prototype, or personal web showcase, our team is ready to help.
+      </p>
+      <a href="team.html" class="btn btn-primary">Connect With Our Team &rarr;</a>
+    </section>
+  </main>
 
-        <section class="content-box">
-            <h2>How We Work</h2>
-            <p>
-                We follow a simple and effective development process:
-            </p>
-            <ol>
-                <li>Understanding client requirements</li>
-                <li>Designing layout and user interface</li>
-                <li>Developing responsive and functional pages</li>
-                <li>Testing across different screen sizes</li>
-                <li>Final delivery and support</li>
-            </ol>
-        </section>
-
-        <section class="content-box">
-            <h2>Who Can Contact Us</h2>
-            <p>
-                Anyone who needs a professional website can reach out to us, including:
-            </p>
-            <ul>
-                <li>Students</li>
-                <li>Small business owners</li>
-                <li>Startup teams</li>
-                <li>Individuals looking for a personal website</li>
-            </ul>
-        </section>
-
-    </main>
-
-    <footer id="footer" class="p-6 text-center text-sm text-muted">
-        © <span id="year"></span> BinaryNbeyond — built with care. <span class="ml-2">Made for learning.</span>
-    </footer>
-    <!-- existing site script injects navbar & theme toggles -->
-    <script src="js/script.js" defer></script>
-
-    <!-- page micro-interactions -->
-    <script src="js/index.js" defer></script>
-
+  <div id="footer"></div>
+  <!-- Site script injects navbar & theme toggles -->
+  <script src="js/script.js" defer></script>
+  <script src="js/index.js" defer></script>
 </body>
 
 </html>

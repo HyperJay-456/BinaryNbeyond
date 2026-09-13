@@ -2,120 +2,219 @@
 <html lang="en">
 
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2NKRTM6JXC"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2NKRTM6JXC"></script>
   <script>
-   window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-2NKRTM6JXC');
   </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BinaryNbeyond - About this Website</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About BinaryNBeyond — Architecture, Features & Mission</title>
 
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-  <!-- shared UI + page styles -->
+  <!-- Shared UI + Page Styles -->
   <link rel="icon" type="image/x-icon" href="logo.webp">
-  <link rel="stylesheet" href="css/common.css" />
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/index.css" />
-    <!-- Meta Tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="About Binary & Beyond | Number Systems & Bitwise Operations">
-    <meta name="description" content="Binary & Beyond is an educational web application that helps students perform arithmetic operations, bitwise operations, and number system conversions in an easy and interactive way.">
-    <meta name="keywords" content="Binary and Beyond, number system conversion, bitwise operations, arithmetic operations, binary, decimal, octal, hexadecimal, computer science project, FSD mini project">
-    <meta name="author" content="Binary & Beyond Team">
-    <meta name="robots" content="index, follow">
-    <!-- Open Graph (Optional but Good) -->
-    <meta property="og:title" content="About Binary & Beyond">
-    <meta property="og:description" content="Learn how Binary & Beyond helps students understand number systems, bitwise logic, and arithmetic operations through a simple web interface.">
-    <meta property="og:type" content="website">
+  <link rel="stylesheet" href="css/about.css" />
+
+  <!-- Prevent FOUC: Apply theme before DaisyUI renders -->
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme') || 'synthwave';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      if (savedTheme === 'synthwave') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+
+  <!-- SEO & Social Meta Tags -->
+  <meta name="title" content="About BinaryNBeyond — Interactive Digital Logic & Number Systems">
+  <meta name="description" content="Learn about BinaryNBeyond's mission, architecture, and interactive computing tools for computer science students and engineers.">
+  <meta name="keywords" content="BinaryNBeyond, number systems, computer architecture, bitwise operations, 2's complement subtraction, digital logic visualizer">
+  <meta name="author" content="BinaryNBeyond Team">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://binarynbeyond.com/about.html">
+
+  <meta property="og:title" content="About BinaryNBeyond — Digital Logic & Number Systems">
+  <meta property="og:description" content="Visual, transparent computing tools for arithmetic, bitwise logic, and number systems.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://binarynbeyond.com/about.html">
 </head>
-<body>
-    <div id="navbar"></div>
-    <main class="container">
-        <section class="content-box">
-            <h1>About Binary & Beyond</h1>
-            <p>
-                <strong>Binary & Beyond</strong> is an educational web application designed to help students
-                understand and perform various number system operations in a simple and interactive way.
-                The platform focuses on building strong fundamentals of computer arithmetic, bitwise logic,
-                and number system conversions.
+
+<body class="bg-main text-main">
+  <!-- Navbar injected by js/script.js -->
+  <div id="navbar"></div>
+
+  <main class="container pt-24 pb-12">
+    <!-- Hero Section -->
+    <header class="about-hero">
+      <div class="badge-glow mb-4">
+        <span>Architecture & Mission</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-5">
+        Next-Gen Visual Computing for <span class="bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-400 bg-clip-text text-transparent">Digital Logic</span>
+      </h1>
+      <p class="text-base sm:text-lg text-muted leading-relaxed">
+        <strong>BinaryNBeyond</strong> demystifies low-level computer arithmetic. We provide real-time, deterministic, step-by-step insight into how modern microprocessors and silicon handle bits, bases, and binary complements.
+      </p>
+    </header>
+
+    <!-- Core Interactive Engines -->
+    <section>
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight">Core Computing Engines</h2>
+          <p class="text-sm text-muted">Specialized interactive tools designed for students and engineers.</p>
+        </div>
+      </div>
+
+      <div class="feature-grid">
+        <!-- Card 1: Arithmetic -->
+        <article class="card feature-card">
+          <div>
+            <div class="feature-icon-wrapper">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div class="flex items-center gap-2 mb-2">
+              <h3 class="text-xl font-bold">Arithmetic Engine</h3>
+              <span class="badge-glow text-[10px]">2's Complement</span>
+            </div>
+            <p class="text-sm text-muted mb-6 leading-relaxed">
+              Full-width binary addition, textbook 2's complement subtraction with sign-bit normalization, end-carry inspection, division with remainders, and floating-point support.
             </p>
-        </section>
+          </div>
+          <a href="arithmetic.html" class="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-400 hover:text-indigo-300 group">
+            <span>Explore Arithmetic Engine</span>
+            <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </a>
+        </article>
 
-        <section class="content-box">
-            <h2>What Our Website Does</h2>
-            <p>
-                This website provides multiple tools that allow users to work with numbers commonly used in
-                computer science. Each section of the website is dedicated to a specific type of operation.
+        <!-- Card 2: Bitwise -->
+        <article class="card feature-card">
+          <div>
+            <div class="feature-icon-wrapper icon-cyan">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+              </svg>
+            </div>
+            <div class="flex items-center gap-2 mb-2">
+              <h3 class="text-xl font-bold">Bitwise Studio</h3>
+              <span class="badge-glow badge-cyan text-[10px]">Register Level</span>
+            </div>
+            <p class="text-sm text-muted mb-6 leading-relaxed">
+              Comprehensive bitwise operations: AND, OR, XOR, NOT, Left Shift, and Right Shift. Displays hardware-accurate bit registers and binary mask representations.
             </p>
+          </div>
+          <a href="bitwise.html" class="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-400 hover:text-cyan-300 group">
+            <span>Launch Bitwise Studio</span>
+            <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </a>
+        </article>
 
-            <ul>
-                <li>
-                    <strong>Arithmetic Operations:</strong><br />
-                    Perform basic arithmetic calculations such as addition, subtraction, multiplication,
-                    and division with ease.
-                </li>
-                <br />
-                <li>
-                    <strong>Bitwise Operations:</strong><br />
-                    Understand how bitwise operators work by performing operations like AND, OR, XOR,
-                    left shift, and right shift on numbers.
-                </li>
-                <br />
-                <li>
-                    <strong>Number System Conversions:</strong><br />
-                    Convert numbers between different number systems such as Binary, Decimal, Octal,
-                    and Hexadecimal.
-                </li>
-            </ul>
-        </section>
-
-        <section class="content-box">
-            <h2>How This Website Is Useful</h2>
-            <p>
-                Binary & Beyond is especially useful for students studying Computer Science, Information
-                Technology, or related fields. It helps users:
+        <!-- Card 3: Base Conversions -->
+        <article class="card feature-card">
+          <div>
+            <div class="feature-icon-wrapper icon-purple">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+              </svg>
+            </div>
+            <div class="flex items-center gap-2 mb-2">
+              <h3 class="text-xl font-bold">Base Conversions</h3>
+              <span class="badge-glow badge-violet text-[10px]">Arbitrary Radix</span>
+            </div>
+            <p class="text-sm text-muted mb-6 leading-relaxed">
+              Universal bidirectional conversion across Binary, Octal, Decimal, and Hexadecimal with intermediate division steps, positional weights, and radix proofs.
             </p>
+          </div>
+          <a href="numberConversions.html" class="inline-flex items-center gap-1.5 text-sm font-semibold text-purple-400 hover:text-purple-300 group">
+            <span>Convert Number Bases</span>
+            <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </a>
+        </article>
+      </div>
+    </section>
 
-            <ul>
-                <li>Strengthen their understanding of number systems</li>
-                <li>Visualize how bitwise operations work internally</li>
-                <li>Practice calculations without manual errors</li>
-                <li>Prepare for exams, lab work, and interviews</li>
-            </ul>
+    <!-- Engineering Principles Grid -->
+    <section>
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-2">Why BinaryNBeyond?</h2>
+        <p class="text-sm text-muted">Designed from first principles to replace confusing black-box calculators.</p>
+      </div>
 
-            <p>
-                The clean interface and easy-to-use design make learning faster and more effective.
-            </p>
-        </section>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="card p-5">
+          <div class="text-indigo-400 font-mono text-xs font-bold uppercase tracking-wider mb-2">01 // Architecture</div>
+          <h3 class="text-base font-bold mb-2">100% Client-Side</h3>
+          <p class="text-xs text-muted leading-relaxed">Zero server lag, zero telemetry. All computations execute instantaneously inside your browser engine.</p>
+        </div>
 
-        <section class="content-box">
-            <h2>Who Can Use This Website</h2>
-            <p>
-                This website can be used by:
-            </p>
+        <div class="card p-5">
+          <div class="text-cyan-400 font-mono text-xs font-bold uppercase tracking-wider mb-2">02 // Reliability</div>
+          <h3 class="text-base font-bold mb-2">Textbook Accurate</h3>
+          <p class="text-xs text-muted leading-relaxed">Rigorously tested against computer science curricula specifications and automated Node unit test suites.</p>
+        </div>
 
-            <ul>
-                <li>Engineering students</li>
-                <li>Computer science beginners</li>
-                <li>Anyone interested in learning how computers work with numbers</li>
-            </ul>
-        </section>
-    </main>
+        <div class="card p-5">
+          <div class="text-purple-400 font-mono text-xs font-bold uppercase tracking-wider mb-2">03 // Pedagogy</div>
+          <h3 class="text-base font-bold mb-2">Step Transparency</h3>
+          <p class="text-xs text-muted leading-relaxed">Shows every intermediate bitwise inversion, carry propagation, and quotient remainder so you learn the underlying concepts.</p>
+        </div>
 
-    <footer id="footer" class="p-6 text-center text-sm text-muted">
-        © <span id="year"></span> BinaryNbeyond — built with care. <span class="ml-2">Made for learning.</span>
-    </footer>
-    <!-- existing site script injects navbar & theme toggles -->
-    <script src="js/script.js" defer></script>
+        <div class="card p-5">
+          <div class="text-amber-400 font-mono text-xs font-bold uppercase tracking-wider mb-2">04 // Design</div>
+          <h3 class="text-base font-bold mb-2">Modern Aesthetic</h3>
+          <p class="text-xs text-muted leading-relaxed">Sleek glassmorphism, responsive mobile layouts, keyboard accessibility, and instant dark/light theme switching.</p>
+        </div>
+      </div>
+    </section>
 
-    <!-- page micro-interactions -->
-    <script src="js/index.js" defer></script>
+    <!-- Who Is This For? -->
+    <section class="card p-8">
+      <h2 class="text-2xl font-bold tracking-tight mb-6 text-center">Built for Learners, Engineers & Educators</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="space-y-2 border-l-2 border-indigo-500/40 pl-4">
+          <h3 class="text-lg font-bold">Engineering Students</h3>
+          <p class="text-sm text-muted leading-relaxed">Master Digital Logic Design (DLD), Computer Architecture (COA), and Microprocessor fundamentals with confidence for lab tests and university exams.</p>
+        </div>
+        <div class="space-y-2 border-l-2 border-cyan-500/40 pl-4">
+          <h3 class="text-lg font-bold">Systems & Embedded Devs</h3>
+          <p class="text-sm text-muted leading-relaxed">Quickly verify register bitmasks, bit shifts, and 2's complement representations without needing to spin up a scratch C program.</p>
+        </div>
+        <div class="space-y-2 border-l-2 border-purple-500/40 pl-4">
+          <h3 class="text-lg font-bold">Curious Self-Learners</h3>
+          <p class="text-sm text-muted leading-relaxed">Build intuition for how physical silicon chips translate high-level code into electrical 1s and 0s.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <section class="about-cta-banner">
+      <h2 class="text-2xl sm:text-3xl font-extrabold mb-3">Ready to explore digital logic?</h2>
+      <p class="text-muted text-sm sm:text-base max-w-xl mx-auto mb-6">
+        Start calculating with step-by-step transparency. Free, open, and instant.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="arithmetic.html" class="btn btn-primary">Open Arithmetic Engine</a>
+        <a href="bitwise.html" class="btn btn-outline">Launch Bitwise Studio</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer injected by js/script.js -->
+  <div id="footer"></div>
+
+  <script src="js/script.js" defer></script>
+  <script src="js/index.js" defer></script>
 </body>
 
 </html>

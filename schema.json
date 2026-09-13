@@ -9,7 +9,7 @@
   "offers": {
     "@type": "Offer",
     "category": "Web Development Services",
-    "description": "Responsive and industry-level website development services using modern web technologies such as HTML, CSS, JavaScript, and Bootstrap."
+    "description": "Responsive and industry-level website development services using modern web technologies such as HTML, CSS, JavaScript, and Tailwind CSS."
   },
   "educationalCredentialAwarded": "Knowledge of Number Systems and Bitwise Operations",
   "audience": {

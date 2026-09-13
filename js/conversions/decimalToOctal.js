@@ -1,6 +1,7 @@
 function decimalToOctal(decimal) {
     let steps = [];
-    let number = decimal;
+    let isNegative = decimal < 0;
+    let number = Math.abs(decimal);
     let octal = "";
 
     steps.push(`Decimal number: ${decimal}`);
@@ -26,10 +27,19 @@ function decimalToOctal(decimal) {
         number = quotient;
     }
 
+    if (isNegative) {
+        octal = "-" + octal;
+        steps.push(`Apply negative sign: -${octal.substring(1)}`);
+    }
+
     steps.push(`Final Octal Value = ${octal}`);
 
     return {
         result: octal,
         steps: steps
     };
+}
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = { decimalToOctal };
 }

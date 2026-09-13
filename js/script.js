@@ -11,37 +11,80 @@ document.addEventListener('DOMContentLoaded', () => {
      Navbar & Footer (injection)
      -------------------------- */
   const NAV_HTML = `
-<nav class="navbar shadow-sm p-3" aria-label="Main navigation">
-        <div class="navbar-start">
-            <a class="inherited-color btn btn-ghost text-xl" href="/" aria-label="BinaryNbeyond homepage">BinaryNbeyond</a>
+<nav class="navbar px-4 sm:px-6 py-2.5 bg-transparent border-none transition-all duration-300" aria-label="Main navigation">
+        <div class="navbar-start gap-2">
+            <button id="mobile-menu-button" class="lg:hidden btn btn-ghost btn-sm btn-circle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <a class="group flex items-center gap-3 px-2 py-1.5 rounded-xl transition-all duration-200" href="index.html" aria-label="BinaryNBeyond homepage">
+                <div class="flex-shrink-0 flex items-center justify-center">
+                    <img src="logo.webp" alt="BinaryNBeyond logo" class="w-8 h-8 rounded-lg object-contain" width="32" height="32" />
+                </div>
+                <div class="flex flex-col text-left leading-none select-none">
+                    <span class="text-[17px] font-black tracking-tight flex items-center">
+                        <span class="brand-text">Binary</span><span class="text-indigo-400 font-extrabold px-[1px]">N</span><span class="brand-text">Beyond</span>
+                    </span>
+                    <span class="text-[9px] font-mono font-semibold tracking-widest text-muted uppercase opacity-75 mt-0.5">Visual Computing</span>
+                </div>
+            </a>
         </div>
 
-        <div id="mobile-menu" class="navbar-center hidden lg:flex">
-            <ul class="menu menu-horizontal px-1" role="menubar" aria-label="Primary navigation">
-                <li role="none"><a role="menuitem" href="/" class="px-2">Home</a></li>
-                <li role="none"><a role="menuitem" href="/team.html" class="px-2">Team</a></li>
-                <li role="none" class="relative">
-                    <button id="features-button" aria-expanded="false" aria-controls="features-menu"
-                        aria-haspopup="true">Features</button>
-                    <ul id="features-menu" role="menu"
-                        class="p-2 bg-base-100 w-40 z-50 hidden absolute mt-2 rounded-box shadow">
-                        <li role="none"><a role="menuitem" href="/arithmetic.html"
-                                class="block px-2 py-1">Arithmetic</a></li>
-                        <li role="none"><a role="menuitem" href="/bitwise.html" class="block px-2 py-1">Bitwise</a></li>
-                        <li role="none"><a role="menuitem" href="/numberConversions.html" class="block px-2 py-1">Number
-                                Conversions</a></li>
+        <div id="mobile-menu" class="navbar-center hidden lg:flex flex-col lg:flex-row absolute lg:static top-16 left-0 right-0 bg-base-100/95 lg:bg-transparent backdrop-blur-2xl lg:backdrop-blur-none p-4 lg:p-0 shadow-2xl lg:shadow-none z-40 border-b lg:border-none border-white/10">
+            <ul class="menu menu-vertical lg:menu-horizontal px-1 w-full lg:w-auto font-medium gap-1" role="menu" aria-label="Primary navigation">
+                <li><a id="nav-home" href="index.html" class="px-3.5 py-1.5 rounded-lg hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors">Home</a></li>
+                <li class="relative">
+                    <button id="features-button" class="px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors" aria-expanded="false" aria-controls="features-menu" aria-haspopup="true">
+                        <span>Calculators</span>
+                        <svg class="w-3.5 h-3.5 opacity-70 transition-transform duration-200" id="features-caret" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <ul id="features-menu" class="p-2.5 bg-base-100/95 backdrop-blur-2xl w-64 z-50 hidden absolute mt-2 rounded-2xl shadow-2xl border border-white/10 space-y-1.5">
+                        <li>
+                            <a id="nav-arithmetic" href="arithmetic.html" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-indigo-500/10 hover:text-indigo-400 transition-colors">
+                                <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 mt-1.5 flex-shrink-0"></span>
+                                <div>
+                                    <div class="font-bold text-sm">Arithmetic Engine</div>
+                                    <div class="text-[11px] text-muted font-normal">2's complement subtraction & division</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="nav-bitwise" href="bitwise.html" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-indigo-500/10 hover:text-indigo-400 transition-colors">
+                                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 mt-1.5 flex-shrink-0"></span>
+                                <div>
+                                    <div class="font-bold text-sm">Bitwise Studio</div>
+                                    <div class="text-[11px] text-muted font-normal">AND, OR, XOR, NOT, Shifts</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="nav-conversions" href="numberConversions.html" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-indigo-500/10 hover:text-indigo-400 transition-colors">
+                                <span class="w-2.5 h-2.5 rounded-full bg-purple-500 mt-1.5 flex-shrink-0"></span>
+                                <div>
+                                    <div class="font-bold text-sm">Base Conversions</div>
+                                    <div class="text-[11px] text-muted font-normal">Binary, Octal, Decimal, Hex</div>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </li>
+                <li><a id="nav-about" href="about.html" class="px-3.5 py-1.5 rounded-lg hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors">About</a></li>
+                <li><a id="nav-services" href="webdevelopment.html" class="px-3.5 py-1.5 rounded-lg hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors">Services</a></li>
+                <li><a id="nav-team" href="team.html" class="px-3.5 py-1.5 rounded-lg hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors">Team</a></li>
             </ul>
         </div>
-        <div class="navbar-end">     
-          <label class="flex cursor-pointer gap-2 items-center" for="theme-toggle">
-            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="navbar-end gap-2">
+          <a href="https://github.com/HyperJay-456/BinaryNbeyond" target="_blank" rel="noopener" class="hidden sm:inline-flex btn btn-ghost btn-sm btn-circle text-muted hover:text-indigo-400" title="GitHub Repository">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </a>
+          <label class="flex cursor-pointer gap-2 items-center px-2.5 py-1.5 rounded-full bg-base-200/50 hover:bg-base-200 border border-white/10 transition-colors" for="theme-toggle" title="Toggle Theme">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-400">
               <circle cx="12" cy="12" r="5"></circle>
               <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path>
             </svg>
-            <input id="theme-toggle" type="checkbox" class="toggle theme-controller" aria-label="Toggle theme">
-            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <input id="theme-toggle" type="checkbox" class="toggle toggle-sm theme-controller" aria-label="Toggle theme">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-400">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
           </label>
@@ -50,22 +93,69 @@ document.addEventListener('DOMContentLoaded', () => {
 `;
 
 const FOOTER_HTML = `
-<footer class="footer sm:footer-horizontal bg-base-400 text-base-content p-6 mt-8" aria-label="Site footer">
-  <nav>
-    <h6 class="footer-title">Services</h6>
-    <a class="link link-hover" href="/webdevelopment.html">Web Development</a>
-  </nav>
-  <nav>
-    <h6 class="footer-title">Company</h6>
-    <a class="link link-hover" href="/about.html">About this Website</a>
-    <a class="link link-hover" href="/team.html">Contact</a>
-  </nav>
-  <nav>
-    <h6 class="footer-title">Social</h6>
-      <a href="https://x.com/BinaryNBeyond" target="_blank" rel="noopener" aria-label="X">X</a>
-      <a href="https://www.youtube.com/@binarynbeyond-b7f" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a>
-      <a href="https://www.instagram.com/beyond_n_binary/?igsh=eGJjZDQxY3NlNnNh#" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
-  </nav>
+<footer class="bg-base-200/60 backdrop-blur-xl text-base-content pt-14 pb-8 px-6 mt-20 border-t border-white/10" aria-label="Site footer">
+  <!-- Pre-Footer Banner -->
+  <div class="max-w-6xl mx-auto mb-14 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-5">
+    <div class="space-y-1 text-center sm:text-left">
+      <h4 class="text-lg font-extrabold tracking-tight">Accelerate your understanding of digital logic.</h4>
+      <p class="text-xs text-muted">All calculation engines run 100% in-browser with zero latency and full privacy.</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="arithmetic.html" class="btn btn-primary btn-sm">Open Arithmetic</a>
+      <a href="https://github.com/HyperJay-456/BinaryNbeyond" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Star on GitHub</a>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+    <div class="space-y-3.5">
+      <div class="flex items-center gap-2.5">
+        <div class="relative flex-shrink-0">
+          <img src="logo.webp" alt="BinaryNBeyond logo" class="w-7 h-7 rounded-lg ring-1 ring-white/15" />
+        </div>
+        <div class="flex flex-col text-left leading-none">
+          <span class="text-base font-black tracking-tight flex items-center">
+            <span>Binary</span><span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent font-extrabold px-[1px]">N</span><span>Beyond</span>
+          </span>
+          <span class="text-[8px] font-mono font-semibold tracking-widest text-muted uppercase opacity-75 mt-0.5">Visual Computing</span>
+        </div>
+      </div>
+      <p class="text-sm opacity-75 leading-relaxed">Next-generation visual calculators for arithmetic, digital logic, and number systems with transparent step-by-step solutions.</p>
+    </div>
+    <nav class="flex flex-col gap-2.5 text-sm">
+      <h6 class="font-bold uppercase tracking-wider text-xs text-indigo-400">Core Engines</h6>
+      <a class="hover:text-indigo-400 transition-colors" href="arithmetic.html">Arithmetic Operations</a>
+      <a class="hover:text-indigo-400 transition-colors" href="bitwise.html">Bitwise Operations Studio</a>
+      <a class="hover:text-indigo-400 transition-colors" href="numberConversions.html">Base Conversions</a>
+    </nav>
+    <nav class="flex flex-col gap-2.5 text-sm">
+      <h6 class="font-bold uppercase tracking-wider text-xs text-indigo-400">Resources</h6>
+      <a class="hover:text-indigo-400 transition-colors" href="about.html">About BinaryNBeyond</a>
+      <a class="hover:text-indigo-400 transition-colors" href="webdevelopment.html">Engineering Services</a>
+      <a class="hover:text-indigo-400 transition-colors" href="team.html">Architects & Team</a>
+    </nav>
+    <nav class="flex flex-col gap-2.5 text-sm">
+      <h6 class="font-bold uppercase tracking-wider text-xs text-indigo-400">Ecosystem</h6>
+      <a class="hover:text-indigo-400 transition-colors flex items-center gap-2" href="https://x.com/BinaryNBeyond" target="_blank" rel="noopener" aria-label="X">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X (Twitter)
+      </a>
+      <a class="hover:text-indigo-400 transition-colors flex items-center gap-2" href="https://github.com/HyperJay-456/BinaryNbeyond" target="_blank" rel="noopener">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+      <a class="hover:text-indigo-400 transition-colors flex items-center gap-2" href="https://www.youtube.com/@binarynbeyond-b7f" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        YouTube
+      </a>
+    </nav>
+  </div>
+  <div class="max-w-6xl mx-auto mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs opacity-70 gap-3">
+    <p>&copy; <span id="year"></span> BinaryNBeyond. Crafted for learners and engineers worldwide.</p>
+    <button id="back-to-top" class="hover:text-indigo-400 transition-colors flex items-center gap-1 cursor-pointer">
+      <span>Back to top</span>
+      <span>&uarr;</span>
+    </button>
+  </div>
 </footer>
 `;
 
@@ -74,25 +164,66 @@ const FOOTER_HTML = `
   if (navContainer) navContainer.innerHTML = NAV_HTML;
   if (footerContainer) footerContainer.innerHTML = FOOTER_HTML;
 
+  // Auto-update copyright year
+  const yr = document.getElementById('year');
+  if (yr) yr.textContent = new Date().getFullYear();
+
+  // Back to top smooth scroll
+  const backToTopBtn = document.getElementById('back-to-top');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Active page highlight in navigation
+  (function highlightActivePage() {
+    const page = window.location.pathname.split('/').pop() || 'index.html';
+    const linkMap = {
+      'index.html': 'nav-home',
+      'arithmetic.html': 'nav-arithmetic',
+      'bitwise.html': 'nav-bitwise',
+      'numberConversions.html': 'nav-conversions',
+      'about.html': 'nav-about',
+      'webdevelopment.html': 'nav-services',
+      'team.html': 'nav-team'
+    };
+    const activeId = linkMap[page];
+    if (activeId) {
+      const activeEl = document.getElementById(activeId);
+      if (activeEl) {
+        activeEl.classList.add('nav-active');
+        // If in calculators menu, highlight parent button
+        if (activeId.startsWith('nav-arithmetic') || activeId.startsWith('nav-bitwise') || activeId.startsWith('nav-conversions')) {
+          const featBtn = document.getElementById('features-button');
+          if (featBtn) featBtn.classList.add('nav-active');
+        }
+      }
+    }
+  })();
 
   /* --------------------------
      Global Theme Sync (ALL PAGES)
      -------------------------- */
-  const THEME_KEY = 'site-theme';
+  const THEME_KEY = 'theme';
   const LIGHT_THEME = 'light';
   const DARK_THEME = 'synthwave';
   const themeCheckbox = document.getElementById('theme-toggle');
 
   const applyTheme = (theme) => {
     document.documentElement.setAttribute('data-theme', theme);
+    const isDark = (theme === DARK_THEME);
+    document.documentElement.classList.toggle('dark', isDark);
+    if (document.documentElement.style) {
+      document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+    }
   };
 
-  /* ✅ Apply theme on EVERY page load */
+  /* Apply theme on page load */
   (function initTheme() {
-    let savedTheme = LIGHT_THEME;
-
+    let savedTheme = DARK_THEME;
     try {
-      savedTheme = localStorage.getItem(THEME_KEY) || LIGHT_THEME;
+      savedTheme = localStorage.getItem(THEME_KEY) || DARK_THEME;
     } catch (e) { }
 
     applyTheme(savedTheme);
@@ -102,10 +233,10 @@ const FOOTER_HTML = `
     }
   })();
 
-  /* ✅ Toggle affects ALL pages */
+  /* Toggle affects ALL pages */
   if (themeCheckbox) {
     themeCheckbox.addEventListener('change', (e) => {
-      const theme = e.target.checked ?   DARK_THEME : LIGHT_THEME;
+      const theme = e.target.checked ? DARK_THEME : LIGHT_THEME;
       applyTheme(theme);
 
       try {
@@ -114,22 +245,15 @@ const FOOTER_HTML = `
     });
   }
 
-  /* --------------------------
-   Cross-page / cross-tab sync
-   -------------------------- */
+  /* Cross-page / cross-tab sync */
   window.addEventListener('storage', (event) => {
     if (event.key !== THEME_KEY) return;
-
     const newTheme = event.newValue || LIGHT_THEME;
-
     applyTheme(newTheme);
-
     if (themeCheckbox) {
       themeCheckbox.checked = (newTheme === DARK_THEME);
     }
   });
-
-
 
   /* --------------------------
      Accessibility: menu toggles
@@ -179,7 +303,6 @@ const FOOTER_HTML = `
     const size = Math.max(rect.width, rect.height) * 1.8;
     r.style.width = r.style.height = size + 'px';
 
-    // pointer coordinates -> position ripple so its center matches input
     const left = (ev.clientX || rect.left + rect.width / 2) - rect.left - size / 2;
     const top = (ev.clientY || rect.top + rect.height / 2) - rect.top - size / 2;
     r.style.left = left + 'px';
@@ -192,230 +315,7 @@ const FOOTER_HTML = `
   document.addEventListener('pointerdown', (ev) => {
     const btn = ev.target.closest?.('.btn');
     if (btn) {
-      // only ripple for primary/touchable buttons
       createRipple(ev, btn);
     }
   });
-
-  /* --------------------------
-     Result animation helper
-     -------------------------- */
-  function animateResult(el, text) {
-    if (!el) return;
-    // small bailout if same text
-    if (el.textContent.trim() === String(text).trim()) {
-      // still pulse a little
-      el.classList.remove('result-pulse');
-      void el.offsetWidth;
-      el.classList.add('result-pulse');
-      return;
-    }
-
-    // fade/scale replacement
-    el.classList.add('opacity-0', 'scale-95');
-    setTimeout(() => {
-      el.textContent = text;
-      el.classList.remove('opacity-0', 'scale-95');
-      el.classList.remove('result-pulse');
-      void el.offsetWidth; // force reflow
-      el.classList.add('result-pulse');
-      // remove class after animation
-      setTimeout(() => el.classList.remove('result-pulse'), 500);
-    }, 80);
-  }
-
-  /* --------------------------
-     Input validation + keyboard binding
-     -------------------------- */
-  const numberSystem = document.getElementById('numberSystem');
-  const num1 = document.getElementById('num1');
-  const num2 = document.getElementById('num2');
-  const arithResult = document.getElementById('arithResult');
-  const arithSteps = document.getElementById('arithSteps');
-  const arithError = document.getElementById('arithError');
-
-  function setError(msg) {
-    if (arithError) arithError.textContent = msg || '';
-  }
-
-  function sanitizeBinaryString(s) {
-    return (s || '').replace(/[^01]/g, '');
-  }
-  function sanitizeDecimalString(s) {
-    return (s || '').replace(/[^\d\.\-]/g, '');
-  }
-
-  function validateInputs() {
-    setError('');
-    if (!num1 || !num2 || !numberSystem) return false;
-    const system = numberSystem.value;
-    let a = num1.value.trim();
-    let b = num2.value.trim();
-
-    if (system === 'binary') {
-      a = sanitizeBinaryString(a);
-      b = sanitizeBinaryString(b);
-      if (a === '' || b === '') { setError('Please enter valid binary numbers.'); return null; }
-      return { a, b, system };
-    } else {
-      // decimal: allow negative and decimal point
-      a = sanitizeDecimalString(a);
-      b = sanitizeDecimalString(b);
-      if (a === '' || b === '') { setError('Please enter valid decimal numbers.'); return null; }
-      return { a, b, system };
-    }
-  }
-
-  // live input sanitization (avoid jarring behavior; only sanitize on input but keep caret default)
-  if (num1) num1.addEventListener('input', (e) => {
-    const v = num1.value;
-    if (numberSystem.value === 'binary') {
-      const cleaned = sanitizeBinaryString(v);
-      if (cleaned !== v) num1.value = cleaned;
-    } else {
-      const cleaned = sanitizeDecimalString(v);
-      if (cleaned !== v) num1.value = cleaned;
-    }
-  });
-  if (num2) num2.addEventListener('input', (e) => {
-    const v = num2.value;
-    if (numberSystem.value === 'binary') {
-      const cleaned = sanitizeBinaryString(v);
-      if (cleaned !== v) num2.value = cleaned;
-    } else {
-      const cleaned = sanitizeDecimalString(v);
-      if (cleaned !== v) num2.value = cleaned;
-    }
-  });
-
-  // Enter key triggers calculation when focused in inputs
-  [num1, num2].forEach((inp) => {
-    if (!inp) return;
-    inp.addEventListener('keydown', (ev) => {
-      if (ev.key === 'Enter') {
-        ev.preventDefault();
-        doCalculate();
-      }
-    });
-  });
-
-  /* --------------------------
-     Wire up data-action buttons
-     -------------------------- */
-  function doCalculate() {
-    // call existing performArithmetic() if it's present; otherwise perform a minimal fallback
-    const validated = validateInputs();
-    if (!validated) return;
-    // call global function if present (your arithmetic.js should define this)
-    if (typeof window.performArithmetic === 'function') {
-      try {
-        // The existing function likely sets arithResult and arithSteps itself.
-        // But to ensure animation we intercept the result element after it runs.
-        window.performArithmetic(); // expected to update #arithResult, #arithSteps
-        // animate whatever got written
-        setTimeout(() => {
-          animateResult(arithResult, arithResult?.textContent ?? '');
-        }, 40);
-      } catch (err) {
-        setError('Calculation failed.');
-        console.error(err);
-      }
-    } else {
-      // Minimal fallback implementation (decimal only)
-      try {
-        const op = document.getElementById('operation')?.value || 'add';
-        let a = Number(validated.a);
-        let b = Number(validated.b);
-        let res;
-        switch (op) {
-          case 'add': res = a + b; break;
-          case 'sub': res = a - b; break;
-          case 'mul': res = a * b; break;
-          case 'div': res = b === 0 ? '∞' : (a / b); break;
-        }
-        animateResult(arithResult, String(res));
-      } catch (err) {
-        setError('Calculation failed.');
-      }
-    }
-  }
-
-  function clearInputs() {
-    if (num1) num1.value = '';
-    if (num2) num2.value = '';
-    if (arithResult) arithResult.textContent = '';
-    if (arithSteps) arithSteps.innerHTML = '';
-    setError('');
-  }
-
-  // Practice mode bindings (call into your global functions if present)
-  function newQuestion() {
-    if (typeof window.generateArithmeticPractice === 'function') {
-      window.generateArithmeticPractice();
-      const q = document.getElementById('arithPracticeQuestion');
-      // small visual hint
-      if (q) { q.classList.add('result-pulse'); setTimeout(() => q.classList.remove('result-pulse'), 450); }
-    }
-  }
-  function checkAnswer() {
-    if (typeof window.checkArithmeticPractice === 'function') {
-      window.checkArithmeticPractice();
-      const r = document.getElementById('arithPracticeResult');
-      if (r) { r.classList.add('result-pulse'); setTimeout(() => r.classList.remove('result-pulse'), 500); }
-    }
-  }
-  function showSteps() {
-    if (typeof window.showArithmeticPracticeSteps === 'function') {
-      window.showArithmeticPracticeSteps();
-      const s = document.getElementById('arithPracticeSteps');
-      if (s) { s.classList.add('result-pulse'); setTimeout(() => s.classList.remove('result-pulse'), 600); }
-    }
-  }
-
-  // Delegated click listener for data-action
-  document.addEventListener('click', (ev) => {
-    const btn = ev.target.closest?.('[data-action]');
-    if (!btn) return;
-    const action = btn.getAttribute('data-action');
-    if (!action) return;
-    switch (action) {
-      case 'calculate': doCalculate(); break;
-      case 'clear-inputs': clearInputs(); break;
-      case 'new-question': newQuestion(); break;
-      case 'check-answer': checkAnswer(); break;
-      case 'show-steps': showSteps(); break;
-      default: break;
-    }
-  });
-
-  // also support pressing Enter on practice answer input to check
-  const practiceAnswer = document.getElementById('arithPracticeAnswer');
-  if (practiceAnswer) {
-    practiceAnswer.addEventListener('keydown', (ev) => {
-      if (ev.key === 'Enter') { ev.preventDefault(); checkAnswer(); }
-    });
-  }
-
-  /* --------------------------
-     Small polish: show placeholder state when awaiting result
-     -------------------------- */
-  const resultObserver = new MutationObserver((mutations) => {
-    for (const m of mutations) {
-      if (m.type === 'childList') {
-        // pulse when result changes
-        const el = m.target;
-        if (el && el.classList) {
-          el.classList.remove('result-pulse');
-          void el.offsetWidth;
-          el.classList.add('result-pulse');
-          setTimeout(() => el.classList.remove('result-pulse'), 600);
-        }
-      }
-    }
-  });
-  if (arithResult) resultObserver.observe(arithResult, { childList: true });
-
-  /* --------------------------
-     End of script
-     -------------------------- */
 });
