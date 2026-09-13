@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </li>
                 <li><a id="nav-about" href="about.html" class="px-3.5 py-1.5 rounded-lg hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors">About</a></li>
                 <li><a id="nav-services" href="webdevelopment.html" class="px-3.5 py-1.5 rounded-lg hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors">Services</a></li>
-                <li><a id="nav-team" href="team.html" class="px-3.5 py-1.5 rounded-lg hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors">Team</a></li>
+                <li><a id="nav-team" href="team.html" class="px-3.5 py-1.5 rounded-lg hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors">Creator</a></li>
             </ul>
         </div>
         <div class="navbar-end gap-2">
@@ -131,7 +131,7 @@ const FOOTER_HTML = `
       <h6 class="font-bold uppercase tracking-wider text-xs text-indigo-400">Resources</h6>
       <a class="hover:text-indigo-400 transition-colors" href="about.html">About BinaryNBeyond</a>
       <a class="hover:text-indigo-400 transition-colors" href="webdevelopment.html">Engineering Services</a>
-      <a class="hover:text-indigo-400 transition-colors" href="team.html">Architects & Team</a>
+      <a class="hover:text-indigo-400 transition-colors" href="team.html">Architect & Creator</a>
     </nav>
     <nav class="flex flex-col gap-2.5 text-sm">
       <h6 class="font-bold uppercase tracking-wider text-xs text-indigo-400">Ecosystem</h6>

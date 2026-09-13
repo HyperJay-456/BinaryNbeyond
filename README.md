@@ -15,7 +15,7 @@ An educational, high-precision visual computing engine engineered for Computer S
 
 <br/>
 
-**[🌐 Launch Live Web Application](https://hyperjay-456.github.io/BinaryNbeyond/)** • **[📖 Architecture & Mission](https://hyperjay-456.github.io/BinaryNbeyond/about.html)** • **[🧪 Run Test Suite](#-automated-testing)** • **[👥 Contributors](#-engineering-team--credits)**
+**[🌐 Launch Live Web Application](https://hyperjay-456.github.io/BinaryNbeyond/)** • **[📖 Architecture & Mission](https://hyperjay-456.github.io/BinaryNbeyond/about.html)** • **[🧪 Run Test Suite](#-automated-testing)** • **[👨‍💻 Creator & Architecture](#-creator--credits)**
 
 </div>
 
@@ -38,7 +38,7 @@ An educational, high-precision visual computing engine engineered for Computer S
 | 🔌 **Bitwise Operations Studio** | [**Launch Bitwise Studio**](https://hyperjay-456.github.io/BinaryNbeyond/bitwise.html) | Register-level bit manipulation (`AND`, `OR`, `XOR`, `NOT`, `<<`, `>>`), animated hardware register chips, and binary bitmask explanations. |
 | 🔄 **Universal Radix Converter** | [**Convert Number Bases**](https://hyperjay-456.github.io/BinaryNbeyond/numberConversions.html) | Bidirectional conversion across Binary (2), Octal (8), Decimal (10), and Hexadecimal (16) with intermediate division steps and radix proofs. |
 | 🏛️ **Architecture & Mission** | [**View Architecture**](https://hyperjay-456.github.io/BinaryNbeyond/about.html) | Detailed engineering rationale, curriculum alignment for DLD/COA students, and client-side deterministic computing guarantees. |
-| 👥 **Engineering Team** | [**Meet the Team**](https://hyperjay-456.github.io/BinaryNbeyond/team.html) | Contributor profiles, credentials, academic background, and social links. |
+| 👨‍💻 **Creator & Architect** | [**Meet the Creator**](https://hyperjay-456.github.io/BinaryNbeyond/team.html) | Developer profile, engineering credentials, architecture background, and social links. |
 
 ---
 
@@ -78,7 +78,7 @@ BinaryNBeyond/
 ├── bitwise.html            # Bitwise logic studio & register visualizer
 ├── numberConversions.html  # Universal radix converter
 ├── about.html              # Core architecture, mission & educational principles
-├── team.html               # Engineering team profiles & credentials
+├── team.html               # Creator profile, credentials & engineering values
 ├── css/
 │   ├── style.css           # Global Antigravity design system & tokens
 │   ├── about.css           # About page styling & feature cards
@@ -145,13 +145,11 @@ node --test tests/*.test.mjs
 
 ---
 
-## 👥 Engineering Team & Credits
+## 👨‍💻 Creator & Credits
 
-| Contributor | Role | Focus Areas |
+| Developer | Role | Focus Areas |
 | :--- | :--- | :--- |
-| **Arpit Chalke** | Lead Architect & Engine Developer | Core Algorithms, Base Conversion Logic, Mathematical Engine |
-| **Jay Thakur** | Core Systems & UI Engineer | Antigravity Design System, Interactive Traces, Test Suites & Frontend Architecture |
-| **Shreekant Nannaware** | Marketing & Growth Strategist | Documentation, Pedagogical Structure, User Experience & Outreach |
+| **Jay Thakur** | Creator, System Architect & Full-Stack Engineer | Core Mathematical Engine, 2's Complement Traces, Radix Conversion Algorithms, Antigravity Design System & Automated Test Suites |
 
 ---
 
