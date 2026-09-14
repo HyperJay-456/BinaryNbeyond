@@ -169,8 +169,10 @@ main.container {
   #main,
   .container,
   main.container {
-    padding-top: 5rem !important;
+    padding-top: 4.5rem !important;
     padding-bottom: 2rem;
+    padding-left: 0.875rem;
+    padding-right: 0.875rem;
   }
 }
 
@@ -385,6 +387,15 @@ samp,
   transform: translateY(-2px);
 }
 
+@media (max-width: 640px) {
+  .calc-block,
+  .card,
+  .content-box {
+    padding: 1.15rem;
+    border-radius: 16px;
+  }
+}
+
 /* Subtle Shimmer Wave on Hover */
 .calc-block::before,
 .card::before,
@@ -597,6 +608,82 @@ nav.navbar,
   font-size: clamp(16px, 4vw, 22px);
 }
 
+@media (max-width: 640px) {
+  #navbar nav.navbar,
+  nav.navbar,
+  .navbar {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    min-height: 3.5rem;
+  }
+  .navbar-start {
+    width: auto !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+  .navbar-end {
+    width: auto !important;
+    flex: 0 0 auto !important;
+  }
+}
+
+/* Mobile Navigation Dropdown Overlay (Solid Opaque, No Content Bleed) */
+@media (max-width: 1023px) {
+  #mobile-menu {
+    background-color: var(--bg-main) !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* Desktop Navigation Layout & Overflow Protection */
+@media (min-width: 1024px) {
+  .navbar-start {
+    width: auto !important;
+    flex: 1 1 0% !important;
+    min-width: max-content !important;
+  }
+  .navbar-center,
+  #navbar #mobile-menu,
+  #mobile-menu {
+    width: auto !important;
+    flex: none !important;
+    overflow: visible !important;
+    max-height: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+  .navbar-end {
+    width: auto !important;
+    flex: 1 1 0% !important;
+    justify-content: flex-end !important;
+  }
+}
+
+/* Calculators Dropdown Menu (Features Menu) — Solid Opaque & Floating */
+#features-menu {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--card-border-glow) !important;
+  box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  opacity: 1 !important;
+}
+
+@media (min-width: 1024px) {
+  #features-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 16.5rem !important;
+    margin-top: 0.5rem !important;
+  }
+}
+
 /* =====================================================
    PILL BADGES & CHIPS
 ===================================================== */
@@ -630,13 +717,45 @@ nav.navbar,
   border: 1px solid rgba(168, 85, 247, 0.35);
 }
 
+/* Quick Presets & Interactive Tag Pills */
+.tag-item {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-soft);
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-mono);
+  text-decoration: none;
+  user-select: none;
+  line-height: 1.2;
+}
+
+.tag-item:hover,
+.tag-item:focus {
+  color: var(--primary);
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  transform: translateY(-1px);
+}
+
 /* =====================================================
    EXECUTION STEPS & CODE BLOCKS
 ===================================================== */
 
 .step-box,
 #steps,
-#conversionSteps {
+#conversionSteps,
+#arithSteps,
+#arithPracticeSteps,
+#bitwiseSteps,
+#stepsOutput {
   font-family: var(--font-mono);
   font-size: 0.92rem;
   line-height: 1.75;
@@ -646,6 +765,23 @@ nav.navbar,
   padding: 1.25rem;
   color: var(--text-main);
   box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 640px) {
+  .step-box,
+  #steps,
+  #conversionSteps,
+  #arithSteps,
+  #arithPracticeSteps,
+  #bitwiseSteps,
+  #stepsOutput {
+    padding: 0.9rem;
+    font-size: 0.825rem;
+  }
 }
 
 /* =====================================================

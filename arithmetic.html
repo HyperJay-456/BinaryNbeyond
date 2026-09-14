@@ -10,6 +10,7 @@
     gtag('config', 'G-2NKRTM6JXC');
   </script>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arithmetic Operations (Binary & Decimal) | BinaryNBeyond</title>
   <meta name="description" content="Perform step-by-step arithmetic operations (addition, subtraction via 2's complement, multiplication, division) in binary and decimal with interactive animations." />
   <link rel="canonical" href="https://binarynbeyond.com/arithmetic.html" />
@@ -55,7 +56,7 @@
   <!-- navbar / footer are injected by js/script.js -->
   <div id="navbar"></div>
 
-  <main id="main" class="max-w-4xl mx-auto pt-24 pb-12 px-4 sm:px-6">
+  <main id="main" class="max-w-4xl mx-auto pt-20 sm:pt-24 pb-12 px-3 sm:px-6">
     <header class="mb-8 text-center sm:text-left">
       <div class="badge-glow mb-2">Textbook Engine</div>
       <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Arithmetic Operations</h1>
@@ -63,7 +64,7 @@
     </header>
 
     <section class="mb-8">
-      <div class="card p-6 sm:p-8 rounded-2xl shadow-xl">
+      <div class="card p-5 sm:p-8 rounded-2xl shadow-xl">
         <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
           <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
           <span>Binary & Decimal Calculation</span>
@@ -108,11 +109,11 @@
           </div>
         </div>
 
-        <div class="mt-4 flex flex-wrap gap-2.5 items-center">
+        <div class="mt-5 flex flex-wrap gap-2 sm:gap-2.5 items-stretch sm:items-center">
           <!-- use data-action attributes instead of inline onclick -->
-          <button class="btn btn-primary" data-action="calculate">Calculate</button>
-          <button class="btn btn-outline" data-action="swap-operands" title="Swap Number 1 and Number 2">⇄ Swap</button>
-          <button class="btn btn-outline" data-action="clear-inputs">Clear</button>
+          <button class="btn btn-primary flex-1 sm:flex-initial" data-action="calculate">Calculate</button>
+          <button class="btn btn-outline flex-1 sm:flex-initial" data-action="swap-operands" title="Swap Number 1 and Number 2">⇄ Swap</button>
+          <button class="btn btn-outline w-full sm:w-auto" data-action="clear-inputs">Clear</button>
         </div>
 
         <hr class="my-4">
@@ -128,7 +129,7 @@
     </section>
 
     <section>
-      <div class="card p-6 sm:p-8 rounded-2xl shadow-xl">
+      <div class="card p-5 sm:p-8 rounded-2xl shadow-xl">
         <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
           <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
           <span>Practice Mode – Arithmetic Operations</span>
@@ -152,10 +153,10 @@
           </div>
         </div>
 
-        <div class="mt-4 flex flex-wrap gap-2.5">
-          <button class="btn btn-outline" data-action="new-question">New Question</button>
-          <button class="btn btn-primary" data-action="check-answer">Check Answer</button>
-          <button class="btn btn-outline" data-action="show-steps">Show Steps</button>
+        <div class="mt-4 flex flex-wrap gap-2 sm:gap-2.5">
+          <button class="btn btn-outline flex-1 sm:flex-initial" data-action="new-question">New Question</button>
+          <button class="btn btn-primary flex-1 sm:flex-initial" data-action="check-answer">Check Answer</button>
+          <button class="btn btn-outline w-full sm:w-auto" data-action="show-steps">Show Steps</button>
         </div>
 
         <div id="arithPracticeResult" class="mt-3"></div>

@@ -11,35 +11,35 @@ document.addEventListener('DOMContentLoaded', () => {
      Navbar & Footer (injection)
      -------------------------- */
   const NAV_HTML = `
-<nav class="navbar px-4 sm:px-6 py-2.5 bg-transparent border-none transition-all duration-300" aria-label="Main navigation">
-        <div class="navbar-start gap-2">
-            <button id="mobile-menu-button" class="lg:hidden btn btn-ghost btn-sm btn-circle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+<nav class="navbar px-3 sm:px-6 py-2 bg-transparent border-none transition-all duration-300" aria-label="Main navigation">
+        <div class="navbar-start gap-1.5 sm:gap-2 min-w-0">
+            <button id="mobile-menu-button" class="lg:hidden btn btn-ghost btn-sm btn-circle shrink-0" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
-            <a class="group flex items-center gap-3 px-2 py-1.5 rounded-xl transition-all duration-200" href="index.html" aria-label="BinaryNBeyond homepage">
+            <a class="group flex items-center gap-2 sm:gap-3 px-1 sm:px-2 py-1.5 rounded-xl transition-all duration-200 min-w-0" href="index.html" aria-label="BinaryNBeyond homepage">
                 <div class="flex-shrink-0 flex items-center justify-center">
-                    <img src="logo.webp" alt="BinaryNBeyond logo" class="w-8 h-8 rounded-lg object-contain" width="32" height="32" />
+                    <img src="logo.webp" alt="BinaryNBeyond logo" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg object-contain" width="32" height="32" />
                 </div>
-                <div class="flex flex-col text-left leading-none select-none">
-                    <span class="text-[17px] font-black tracking-tight flex items-center">
+                <div class="flex flex-col text-left leading-none select-none min-w-0">
+                    <span class="text-[15px] sm:text-[17px] font-black tracking-tight flex items-center whitespace-nowrap">
                         <span class="brand-text">Binary</span><span class="text-indigo-400 font-extrabold px-[1px]">N</span><span class="brand-text">Beyond</span>
                     </span>
-                    <span class="text-[9px] font-mono font-semibold tracking-widest text-muted uppercase opacity-75 mt-0.5">Visual Computing</span>
+                    <span class="text-[8px] sm:text-[9px] font-mono font-semibold tracking-widest text-muted uppercase opacity-75 mt-0.5 truncate hidden min-[360px]:block">Visual Computing</span>
                 </div>
             </a>
         </div>
 
-        <div id="mobile-menu" class="navbar-center hidden lg:flex flex-col lg:flex-row absolute lg:static top-16 left-0 right-0 bg-base-100/95 lg:bg-transparent backdrop-blur-2xl lg:backdrop-blur-none p-4 lg:p-0 shadow-2xl lg:shadow-none z-40 border-b lg:border-none border-white/10">
+        <div id="mobile-menu" class="navbar-center hidden lg:flex flex-col lg:flex-row absolute lg:static top-full left-0 right-0 p-4 lg:p-0 z-40 max-lg:max-h-[85vh] max-lg:overflow-y-auto lg:overflow-visible">
             <ul class="menu menu-vertical lg:menu-horizontal px-1 w-full lg:w-auto font-medium gap-1" role="menu" aria-label="Primary navigation">
                 <li><a id="nav-home" href="index.html" class="px-3.5 py-1.5 rounded-lg hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors">Home</a></li>
                 <li class="relative">
-                    <button id="features-button" class="px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors" aria-expanded="false" aria-controls="features-menu" aria-haspopup="true">
+                    <button id="features-button" class="w-full lg:w-auto justify-between lg:justify-start px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors" aria-expanded="false" aria-controls="features-menu" aria-haspopup="true">
                         <span>Calculators</span>
                         <svg class="w-3.5 h-3.5 opacity-70 transition-transform duration-200" id="features-caret" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    <ul id="features-menu" class="p-2.5 bg-base-100/95 backdrop-blur-2xl w-64 z-50 hidden absolute mt-2 rounded-2xl shadow-2xl border border-white/10 space-y-1.5">
+                    <ul id="features-menu" class="p-2.5 w-full lg:w-64 z-50 hidden relative lg:absolute mt-1 lg:mt-2 rounded-xl lg:rounded-2xl space-y-1.5">
                         <li>
                             <a id="nav-arithmetic" href="arithmetic.html" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-indigo-500/10 hover:text-indigo-400 transition-colors">
                                 <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 mt-1.5 flex-shrink-0"></span>
@@ -74,17 +74,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a id="nav-team" href="team.html" class="px-3.5 py-1.5 rounded-lg hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors">Creator</a></li>
             </ul>
         </div>
-        <div class="navbar-end gap-2">
+        <div class="navbar-end gap-1.5 sm:gap-2">
           <a href="https://github.com/HyperJay-456/BinaryNbeyond" target="_blank" rel="noopener" class="hidden sm:inline-flex btn btn-ghost btn-sm btn-circle text-muted hover:text-indigo-400" title="GitHub Repository">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
           </a>
-          <label class="flex cursor-pointer gap-2 items-center px-2.5 py-1.5 rounded-full bg-base-200/50 hover:bg-base-200 border border-white/10 transition-colors" for="theme-toggle" title="Toggle Theme">
-            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-400">
+          <label class="flex cursor-pointer gap-1.5 sm:gap-2 items-center px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full bg-base-200/50 hover:bg-base-200 border border-white/10 transition-colors shrink-0" for="theme-toggle" title="Toggle Theme">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="5"></circle>
               <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path>
             </svg>
-            <input id="theme-toggle" type="checkbox" class="toggle toggle-sm theme-controller" aria-label="Toggle theme">
-            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-400">
+            <input id="theme-toggle" type="checkbox" class="toggle toggle-xs sm:toggle-sm theme-controller" aria-label="Toggle theme">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
           </label>
@@ -93,20 +93,20 @@ document.addEventListener('DOMContentLoaded', () => {
 `;
 
 const FOOTER_HTML = `
-<footer class="bg-base-200/60 backdrop-blur-xl text-base-content pt-14 pb-8 px-6 mt-20 border-t border-white/10" aria-label="Site footer">
+<footer class="bg-base-200/60 backdrop-blur-xl text-base-content pt-10 sm:pt-14 pb-8 px-4 sm:px-6 mt-12 sm:mt-20 border-t border-white/10" aria-label="Site footer">
   <!-- Pre-Footer Banner -->
-  <div class="max-w-6xl mx-auto mb-14 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-5">
+  <div class="max-w-6xl mx-auto mb-10 sm:mb-14 p-5 sm:p-8 rounded-2xl bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-5">
     <div class="space-y-1 text-center sm:text-left">
-      <h4 class="text-lg font-extrabold tracking-tight">Accelerate your understanding of digital logic.</h4>
+      <h4 class="text-base sm:text-lg font-extrabold tracking-tight">Accelerate your understanding of digital logic.</h4>
       <p class="text-xs text-muted">All calculation engines run 100% in-browser with zero latency and full privacy.</p>
     </div>
-    <div class="flex items-center gap-3">
-      <a href="arithmetic.html" class="btn btn-primary btn-sm">Open Arithmetic</a>
-      <a href="https://github.com/HyperJay-456/BinaryNbeyond" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Star on GitHub</a>
+    <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+      <a href="arithmetic.html" class="btn btn-primary btn-sm w-full sm:w-auto">Open Arithmetic</a>
+      <a href="https://github.com/HyperJay-456/BinaryNbeyond" target="_blank" rel="noopener" class="btn btn-outline btn-sm w-full sm:w-auto">Star on GitHub</a>
     </div>
   </div>
 
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10">
     <div class="space-y-3.5">
       <div class="flex items-center gap-2.5">
         <div class="relative flex-shrink-0">
@@ -149,8 +149,8 @@ const FOOTER_HTML = `
       </a>
     </nav>
   </div>
-  <div class="max-w-6xl mx-auto mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs opacity-70 gap-3">
-    <p>&copy; <span id="year"></span> BinaryNBeyond. Crafted for learners and engineers worldwide.</p>
+  <div class="max-w-6xl mx-auto mt-10 sm:mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs opacity-70 gap-3">
+    <p class="text-center sm:text-left">&copy; <span id="year"></span> BinaryNBeyond. Crafted for learners and engineers worldwide.</p>
     <button id="back-to-top" class="hover:text-indigo-400 transition-colors flex items-center gap-1 cursor-pointer">
       <span>Back to top</span>
       <span>&uarr;</span>
@@ -272,6 +272,12 @@ const FOOTER_HTML = `
 
   if (mobileBtn && mobileMenu) {
     mobileBtn.addEventListener('click', () => toggleElement(mobileBtn, mobileMenu));
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileBtn.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.add('hidden');
+      });
+    });
   }
   if (featuresBtn && featuresMenu) {
     featuresBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleElement(featuresBtn, featuresMenu); });

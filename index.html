@@ -45,18 +45,18 @@
   <!-- navbar will be injected by js/script.js -->
   <div id="navbar"></div>
 
-  <main id="main" class="min-h-[85vh] flex items-center justify-center pt-24 pb-12 px-4 sm:px-6">
+  <main id="main" class="min-h-[85vh] flex items-center justify-center pt-20 sm:pt-24 pb-10 sm:pb-12 px-3 sm:px-6">
     <section class="hero max-w-6xl w-full">
-      <div class="hero-inner grid gap-8 md:grid-cols-2 items-center">
+      <div class="hero-inner grid gap-6 sm:gap-8 md:grid-cols-2 items-center">
         <!-- Left: Hero Card & CTA -->
-        <div class="hero-card card p-6 sm:p-8 rounded-2xl shadow-xl">
-          <div class="brand flex items-center gap-4">
+        <div class="hero-card card p-5 sm:p-8 rounded-2xl shadow-xl">
+          <div class="brand flex items-center gap-3 sm:gap-4">
             <div class="flex-shrink-0">
-              <img src="logo.webp" alt="BinaryNBeyond logo" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-contain" width="80" height="80" />
+              <img src="logo.webp" alt="BinaryNBeyond logo" class="w-12 h-12 xs:w-14 xs:h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl object-contain" width="80" height="80" />
             </div>
-            <div>
+            <div class="min-w-0">
               <div class="badge-glow text-[10px] mb-1.5">Visual Computing</div>
-              <h1 class="text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight">
+              <h1 class="text-xl xs:text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight">
                 <span class="bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-400 bg-clip-text text-transparent">BinaryNBeyond</span>
               </h1>
               <p class="text-xs sm:text-sm text-muted mt-0.5">Fast, visual engines for arithmetic, bitwise logic, and base conversions.</p>
@@ -75,13 +75,13 @@
               </p>
             </div>
 
-            <div class="mt-6 flex flex-wrap gap-2.5 sm:gap-3">
-              <a class="btn btn-primary" href="arithmetic.html" data-ripple>Arithmetic Engine</a>
-              <a class="btn btn-dark" href="bitwise.html" data-ripple>Bitwise Studio</a>
-              <a class="btn btn-outline" href="numberConversions.html" data-ripple>Base Conversions</a>
+            <div class="mt-6 flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3">
+              <a class="btn btn-primary w-full sm:w-auto text-center" href="arithmetic.html" data-ripple>Arithmetic Engine</a>
+              <a class="btn btn-dark w-full sm:w-auto text-center" href="bitwise.html" data-ripple>Bitwise Studio</a>
+              <a class="btn btn-outline w-full sm:w-auto text-center" href="numberConversions.html" data-ripple>Base Conversions</a>
             </div>
 
-            <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-xs text-muted">
+            <div class="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-xs text-muted flex-wrap">
               <span class="badge-glow text-[10px]">Client-Side</span>
               <span>Step-by-step animations &bull; Zero latency &bull; Theme aware</span>
             </div>
@@ -90,7 +90,7 @@
 
         <!-- Right: Feature Tiles -->
         <div class="tiles grid gap-4">
-          <div class="tile card p-6 rounded-2xl hover-tilt" data-href="arithmetic.html" tabindex="0" role="button" aria-pressed="false">
+          <div class="tile card p-5 sm:p-6 rounded-2xl hover-tilt" data-href="arithmetic.html" tabindex="0" role="button" aria-pressed="false">
             <div class="flex items-center justify-between mb-2">
               <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
@@ -103,7 +103,7 @@
             </p>
           </div>
 
-          <div class="tile card p-6 rounded-2xl hover-tilt" data-href="bitwise.html" tabindex="0" role="button" aria-pressed="false">
+          <div class="tile card p-5 sm:p-6 rounded-2xl hover-tilt" data-href="bitwise.html" tabindex="0" role="button" aria-pressed="false">
             <div class="flex items-center justify-between mb-2">
               <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
@@ -116,7 +116,7 @@
             </p>
           </div>
 
-          <div class="tile card p-6 rounded-2xl hover-tilt" data-href="numberConversions.html" tabindex="0" role="button" aria-pressed="false">
+          <div class="tile card p-5 sm:p-6 rounded-2xl hover-tilt" data-href="numberConversions.html" tabindex="0" role="button" aria-pressed="false">
             <div class="flex items-center justify-between mb-2">
               <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>

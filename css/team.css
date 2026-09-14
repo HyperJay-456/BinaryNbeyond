@@ -99,3 +99,20 @@
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
 }
+
+@media (max-width: 640px) {
+  .team-hero {
+    padding: 1.25rem 0.5rem 2rem 0.5rem;
+  }
+  .team-card {
+    padding: 1.25rem;
+  }
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

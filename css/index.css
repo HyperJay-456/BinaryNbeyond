@@ -67,6 +67,10 @@
 
 /* responsive */
 @media (max-width: 768px) {
+  .hero {
+    padding-top: 0.5rem;
+    padding-bottom: 1.5rem;
+  }
   .hero-inner {
     grid-template-columns: 1fr;
   }

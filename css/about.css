@@ -60,3 +60,20 @@
   position: relative;
   overflow: hidden;
 }
+
+@media (max-width: 640px) {
+  .about-hero {
+    padding: 1.25rem 0.5rem 2rem 0.5rem;
+  }
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .feature-card {
+    padding: 1.25rem;
+  }
+  .about-cta-banner {
+    padding: 2rem 1.25rem;
+    border-radius: 16px;
+  }
+}
